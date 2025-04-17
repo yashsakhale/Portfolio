@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="NextGen Scholar GenAI Research Assistant">
+	<meta name="author" content="Yash Sakhale">
+
+	<title>NextGen Scholar GenAI Research Assistant</title>
+
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+					<li class="active"><a href="about.html">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">NextGen Scholar GenAI Research Assistant</h1>
+				</header>
+
+				<p><img src="assets\images\nextgen 1 .jpg" alt="Blueprint System Architecture"></p>
+                <p><img src="assets\images\nextgen 2.jpg" alt="Blueprint System Architecture"></p>
+                <p><img src="assets\images\nextgen3.jpg" alt="Blueprint System Architecture"></p>
+
+				<h3>Introduction</h3>
+				<p>Finding relevant academic literature across domains and languages is a key bottleneck in research workflows. Keyword-based search engines often miss contextual nuance, while existing tools rarely support multilingual access. This project introduces a multilingual, GenAI-powered assistant that performs semantic retrieval and paper synthesis to address these challenges.</p>
+
+				<h3>Methods</h3>
+				<p>I implemented a Retrieval-Augmented Generation (RAG) pipeline combining semantic vector search (ChromaDB) and LLM-based response generation. A custom backend API pulls metadata and abstracts from arXiv and PubMed. Queries are embedded using multilingual LLMs, supporting English, Spanish, French, German, Chinese, and Japanese. The system returns relevant paper summaries based on semantic context.</p>
+
+				<blockquote>Results:
+					<li>Top-3 relevance accuracy: 88%+</li>
+					<li>Multilingual support: 6 languages</li>
+                    <li>It was awarded as the best project in the class</li>
+				</blockquote>
+
+				<h3>Discussion</h3>
+				<p>By using generative AI to summarize and recommend papers, this tool makes research more accessible and efficient. It addresses gaps in existing academic discovery systems, particularly for non-English-speaking researchers. I developed the entire stack—including backend logic, LLM integration, indexing, frontend, and performance benchmarking—demonstrating my ability to deliver scalable and inclusive AI solutions.</p>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://arxiv.org/">arXiv</a>: Paper Source</li>
+						<li><a href="https://pubmed.ncbi.nlm.nih.gov/">PubMed</a>: Biomedical Papers</li>
+						<li><a href="https://www.trychroma.com/">ChromaDB</a>: Semantic Vector Indexing</li>
+						<li><a href="https://platform.openai.com/docs/">OpenAI API</a>: LLM Integration</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						371 Spahr St, PA
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="#"><i class="fa fa-twitter fa-2"></i></a>
+						<a href="#"><i class="fa fa-github fa-2"></i></a>
+						<a href="#"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

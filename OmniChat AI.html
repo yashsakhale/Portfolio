@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="OMNICHAT AI – Multimodal GenAI Chatbot">
+	<meta name="author" content="Yash Sakhale">
+
+	<title>OMNICHAT AI – Multimodal GenAI Chatbot</title>
+
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+					<li class="active"><a href="about.html">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">OMNICHAT AI – Multimodal GenAI Chatbot</h1>
+				</header>
+
+				<p><img src="assets\images\OMNICHAT AI1.jpg" alt="OMNICHAT Architecture Diagram"></p>
+				<p><img src="assets\images\OMNICHAT AI2.jpg" alt="OMNICHAT Use Case Example"></p>
+
+
+				<h3>Introduction</h3>
+				<p>Traditional chatbots are limited in handling multimodal inputs such as audio and images. This restricts their use in natural, human-like interaction scenarios. With increasing demand for accessible, AI-driven systems in education, healthcare, and customer service, this project introduces OMNICHAT AI—a real-time chatbot capable of understanding and responding to text, audio, and image queries using advanced multimodal AI models.</p>
+
+				<h3>Methods</h3>
+				<p>The chatbot is deployed on Google Cloud Platform (GCP), integrating:</p>
+				<ul>
+					<li>Vertex AI Gemini model for multimodal reasoning</li>
+					<li>GCP Speech-to-Text API for transcribing audio to text</li>
+					<li>An image upload interface to support vision-based queries</li>
+				</ul>
+				<p>All API calls are optimized with batch processing, request pipelining, and parallel data handling. The system is containerized and deployed via GCP Cloud Run for scalability and reliability.</p>
+
+				<blockquote>Results:
+					<li>25% reduction in response latency compared to prototype</li>
+					<li>Real-time handling of audio, image, and text</li>
+					<li>Tested use cases: visual Q&A, voice interaction, hybrid input</li>
+				</blockquote>
+
+				<h3>Discussion</h3>
+				<p>OMNICHAT AI unifies speech, vision, and text reasoning into a single accessible interface. The use of Gemini enables contextual understanding and richer interaction, ideal for applications in accessibility tools, digital tutoring, and AI customer support. The seamless UI and responsive backend ensure high user engagement.</p>
+				<p>I led the design and development of the architecture, integrated and tuned GCP services, built latency test scripts, and evaluated system performance across modalities.</p>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://cloud.google.com/vertex-ai">Vertex AI</a>: Multimodal LLMs</li>
+						<li><a href="https://cloud.google.com/speech-to-text">Speech-to-Text API</a>: Audio Transcription</li>
+						<li><a href="https://cloud.google.com/run">GCP Cloud Run</a>: Deployment</li>
+						<li><a href="https://cloud.google.com">Google Cloud Platform</a>: Infrastructure</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						371 Spahr St, PA
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="#"><i class="fa fa-twitter fa-2"></i></a>
+						<a href="#"><i class="fa fa-github fa-2"></i></a>
+						<a href="#"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>
