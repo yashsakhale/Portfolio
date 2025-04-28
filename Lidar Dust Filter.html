@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lidar Dust Filter Project">
+    <meta name="author" content="Yash Sakhale">
+    <title>Lidar Dust Filter</title>
+    <link rel="shortcut icon" href="assets/images/gt_favicon.png">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+    <div id="head" class="parallax" parallax-speed="1">
+        <h1 id="logo" class="text-center">
+            <span class="title">Yash Sakhale</span>
+            <span class="tagline">Graduate Researcher<br>
+                <a href=""> Email:ysakhale@andrew.cmu.edu</a></span>
+        </h1>
+    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="about.html">About</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+</header>
+<main id="main">
+    <div class="container">
+        <div class="row topspace">
+            <!-- Article main content -->
+            <article class="col-sm-8 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">Lidar Dust Filter</h1>
+                </header>
+                <div class="row" style="margin-bottom: 30px;">
+                    <div class="col-md-6 text-center">
+                        <img src="assets/images/experimental groudn truth.png" alt="Experimental Ground Truth" class="img-responsive" style="display:inline-block; max-width:100%; margin-bottom:10px;">
+                        <div>Experimental Design - Environment</div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <img src="assets/images/grundtruth point cloud.png" alt="Ground Truth Point Cloud" class="img-responsive" style="display:inline-block; max-width:100%; margin-bottom:10px;">
+                        <div>Ground Truth Point Cloud</div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 30px;">
+                    <div class="col-md-6 text-center">
+                        <img src="assets/images/experimental setup 1 .png" alt="Experimental Setup 1" class="img-responsive" style="display:inline-block; max-width:100%; margin-bottom:10px;">
+                        <div>Experimental Setup 1</div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <img src="assets/images/experimental setup 1 pointcloud.png" alt="Experimental Setup 1 Point Cloud" class="img-responsive" style="display:inline-block; max-width:100%; margin-bottom:10px;">
+                        <div>Experimental Setup 1 Point Cloud</div>
+                    </div>
+                </div>
+                <h3>Project Motivation & Problem Statement</h3>
+                <p>In many real-world environments—especially construction, mining, and excavation zones—robotic systems must operate under adverse conditions like dust, debris, and low visibility. LiDAR (Light Detection and Ranging) is a critical perception tool for 3D mapping and obstacle detection, but dust particles scatter and reflect LiDAR beams, introducing significant noise in the point cloud output. This noise can cause false positives in obstacle detection, degrade map quality, and create potential safety hazards for autonomous or semi-autonomous systems. Despite its widespread use, LiDAR's performance in dusty or particulate-heavy conditions is underexplored. This project aims to bridge that gap by simulating dusty environments, evaluating multiple LiDAR-based configurations, and analyzing the effect of airborne particulates on data fidelity.</p>
+                <h3>Technical Approach</h3>
+                <div class="text-center" style="margin-bottom: 30px;">
+                    <img src="assets/images/technical approach.png" alt="Technical Approach Diagram" class="img-responsive" style="display:inline-block; max-width:100%; margin-bottom:10px;">
+                </div>
+                <h4>1. Environment Simulation and Setup</h4>
+                <ul>
+                    <li>Created a controlled virtual environment to inject simulated dust particles and measure their impact on LiDAR performance.</li>
+                    <li>Defined a Ground Truth Point Cloud captured in a dust-free simulation for reference.</li>
+                    <li>Tested multiple configurations: baseline, alternate mounting positions, and variations in elevation, orientation, and LiDAR models.</li>
+                </ul>
+                <h4>2. Sensor Integration using ROS 2</h4>
+                <ul>
+                    <li>Simulated robot included LiDAR sensors (multiple configurations), IMU, wheel encoders, and RGB-D camera.</li>
+                    <li>Built ROS 2 action graphs for LiDAR data capture, motion control, odometry tracking, and depth imaging.</li>
+                </ul>
+                <p><strong>Demonstration:</strong></p>
+                <ul>
+                    <li><a href="https://drive.google.com/file/d/1zzzTyMGr570MX0g4s98Dgvh5nleIFeMz/view?usp=drive_link" target="_blank">Camera and Depth Image Integration</a></li>
+                    <li><a href="https://drive.google.com/file/d/1lZnY8J9flaVyhuWuI2KXI-GR3X-EC-iQ/view?usp=drive_link" target="_blank">Lidar Integration</a></li>
+                    <li><a href="https://drive.google.com/file/d/1NSBK0va4hjce9u8SIAd5KmqjTNChbMIS/view?usp=drive_link" target="_blank">Controller and Odometry Tracking Integration</a></li>
+                </ul>
+                <h4>3. Data Collection and Processing</h4>
+                <ul>
+                    <li>Collected point cloud data from each setup with synchronized intervals.</li>
+                    <li>Extracted key spatial metrics (height, width, density) across datasets.</li>
+                </ul>
+                <h3>Point Cloud Analysis</h3>
+                <h4>A. Comparing to Ground Truth</h4>
+                <ul>
+                    <li>Compared dusty environment point clouds to clean Ground Truth using visual overlays and coordinate alignment.</li>
+                    <li>Analyzed point cloud density and resolution; normalized for mismatches.</li>
+                </ul>
+                <h4>B. Coordinate System Normalization</h4>
+                <ul>
+                    <li>Performed offset detection and correction, and aligned coordinate axes for accurate comparison.</li>
+                </ul>
+                <h4>C. Noise Localization</h4>
+                <ul>
+                    <li>Used PyTorch's <code>torch.cdist()</code> to compute pairwise Euclidean distances between Ground Truth and Setup coordinates (30cm threshold for "nearby").</li>
+                    <li>Quantified points in the noisy cloud with no nearby match (likely noise) and measured coverage degradation due to dust.</li>
+                </ul>
+                <h3>Results</h3>
+                <div class="text-center" style="margin-bottom: 30px;">
+                    <img src="assets/images/results.png" alt="Alignment Results" class="img-responsive" style="display:inline-block; max-width:100%; margin-bottom:10px;">
+                    <div>Alignment Results: Before and After</div>
+                </div>
+                <ul>
+                    <li>Dust added significant false positives to the point cloud data, which could be misinterpreted as solid objects.</li>
+                    <li>Even small variations in sensor positioning impacted robustness to dust.</li>
+                    <li>Combining LiDAR with a depth camera improved obstacle detection confidence.</li>
+                    <li>Alignment and distance-based filtering quantified the scale and spatial distribution of noise in LiDAR data.</li>
+                </ul>
+                <h3>Limitations</h3>
+                <ul>
+                    <li>Simulation does not fully replicate realistic dust dynamics (e.g., light scattering, airflow, particulate suspension over time).</li>
+                    <li>Real-world validation is needed to confirm model fidelity.</li>
+                    <li>Dust types, densities, and lighting conditions weren't parameterized yet.</li>
+                </ul>
+                <h3>Skills and Technologies Demonstrated</h3>
+                <ul>
+                    <li>ROS 2 system architecture design</li>
+                    <li>LiDAR sensor configuration and simulation</li>
+                    <li>Point cloud data analysis and transformation</li>
+                    <li>Python scripting and PyTorch distance computation</li>
+                    <li>Robotics perception debugging under environmental noise</li>
+                </ul>
+            </article>
+            <!-- /Article -->
+            <!-- Sidebar -->
+            <aside class="col-md-4 sidebar sidebar-left">
+                <div class="widget">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://docs.ros.org/en/foxy/index.html">ROS 2 Documentation</a></li>
+                        <li><a href="https://pytorch.org/docs/stable/generated/torch.cdist.html">PyTorch torch.cdist()</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Lidar">LiDAR Overview</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <!-- /Sidebar -->
+        </div>
+    </div>    <!-- /container -->
+</main>
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 widget">
+                <h3 class="widget-title">Contact</h3>
+                <div class="widget-body">
+                    <p>+5715461217<br>
+                        <a href="mailto:#">ysakhale@andrew.cmu.edu</a><br>
+                        <br>
+                        371 Spahr St, PA 
+                    </p>    
+                </div>
+            </div>
+            <div class="col-md-3 widget">
+                <h3 class="widget-title">Follow me</h3>
+                <div class="widget-body">
+                    <p class="follow-me-icons">
+                        <a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+                        <a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+                        <a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+                        <a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+                    </p>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div> <!-- /row of widgets -->
+    </div>
+</footer>
+<footer id="underfooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 widget">
+                <div class="widget-body">
+                    <p class="text-right">
+                        Copyright &copy; 2025, Yash<br> 
+                        </p>
+                </div>
+            </div>
+        </div> <!-- /row of widgets -->
+    </div>
+</footer>
+<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html> 
