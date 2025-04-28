@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Autonomous Exploration Algorithm for 3D Environment Mapping">
+    <meta name="author" content="Yash Sakhale">
+    <title>Quadcopter Exploration</title>
+    <link rel="shortcut icon" href="assets/images/gt_favicon.png">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+    <div id="head" class="parallax" parallax-speed="1">
+        <h1 id="logo" class="text-center">
+            <span class="title">Yash Sakhale</span>
+            <span class="tagline">Graduate Researcher<br>
+                <a href=""> Email:ysakhale@andrew.cmu.edu</a></span>
+        </h1>
+    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="about.html">About</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sidebar-left.html">Left Sidebar</a></li>
+                            <li><a href="sidebar-right.html">Right Sidebar</a></li>
+                            <li><a href="single.html">Blog Post</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+</header>
+<main id="main">
+    <div class="container">
+        <div class="row topspace">
+            <!-- Article main content -->
+            <article class="col-sm-8 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">Autonomous Exploration Algorithm for 3D Environment Mapping</h1>
+                </header>
+                <h3>Strategy Visualizations</h3>
+                <div class="text-center" style="margin-bottom: 40px;">
+                  <h4>Random Exploration</h4>
+                  <img src="assets/images/random.gif" alt="Random Exploration GIF" class="img-responsive" style="margin: 0 auto 40px auto; width: 100%; max-width: 1000px;">
+                  <h4>Greedy Exploration</h4>
+                  <img src="assets/images/greedy.gif" alt="Greedy Exploration GIF" class="img-responsive" style="margin: 0 auto 40px auto; width: 100%; max-width: 1000px;">
+                  <h4>My Algorithm</h4>
+                  <img src="assets/images/student.gif" alt="My Algorithm GIF" class="img-responsive" style="margin: 0 auto; width: 100%; max-width: 1000px;">
+                </div>
+                <h3>Introduction</h3>
+                <p>Traditional exploration algorithms for 3D environment mapping often struggle with balancing exploration efficiency and computational complexity. This project implements and compares three distinct exploration strategies for autonomous robots: Random, Greedy, and my custom algorithm. The system uses a depth camera sensor to map unknown environments while optimizing for exploration coverage and path planning efficiency.</p>
+                <h3>Methods</h3>
+                <p>The exploration system is implemented in Python, integrating:</p>
+                <ul>
+                    <li>Open3D for 3D visualization and point cloud processing</li>
+                    <li>Custom occupancy grid mapping for environment representation</li>
+                    <li>Depth camera simulation for sensor data generation</li>
+                    <li>Three exploration strategies:
+                        <ul>
+                            <li>Random: Baseline implementation with random movement decisions</li>
+                            <li>Greedy: Maximizes immediate unknown space discovery</li>
+                            <li>My Algorithm: Custom algorithm balancing exploration and path efficiency</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>The system features:</p>
+                <ul>
+                    <li>Real-time visualization of exploration progress</li>
+                    <li>GIF generation for strategy comparison</li>
+                    <li>Configurable sensor parameters and environment settings</li>
+                    <li>Collision detection and safe path planning</li>
+                </ul>
+                <h3>Results</h3>
+                <ul>
+                    <li>My algorithm outperforms both Random and Greedy strategies in:
+                        <ul>
+                            <li>Total environment coverage</li>
+                            <li>Exploration efficiency</li>
+                            <li>Path optimization</li>
+                        </ul>
+                    </li>
+                    <li>Visualization tools demonstrate clear differences in exploration patterns</li>
+                    <li>GIF recordings show real-time exploration behavior</li>
+                    <li>Quantitative metrics for strategy comparison</li>
+                </ul>
+                <h3>Strategy Comparison</h3>
+                <p>
+                  The project compares three exploration strategies:
+                </p>
+                <ul>
+                  <li><strong>Random:</strong> Samples random actions in the x, y, and z directions near its current position. The reward for each possible action is just a random number. The robot moves without any regard for how much new area it will discover or how efficient its path is. This results in inefficient exploration, often revisiting known areas or making unnecessary moves.</li>
+                  <li><strong>Greedy:</strong> Samples actions near its current position and evaluates each by counting the number of unknown voxels (unexplored space) it would see from that new pose. The reward is the number of unknown voxels visible from the new pose. The robot always chooses the action that immediately maximizes the discovery of new space, without considering the cost of movement. This is more efficient than random, but can get stuck in local maxima or make inefficient moves if a large unknown area is far away.</li>
+                  <li><strong>My Algorithm:</strong> Like the greedy approach, my method samples actions near the current position and evaluates the number of unknown voxels visible from each new pose. However, I add a distance penalty to the reward function:<br>
+                    <code>Reward = (number of unknown voxels seen) - 0.5 × (distance from current pose)</code><br>
+                    The robot balances between maximizing the discovery of new space and minimizing unnecessary movement. It prefers actions that reveal new areas but penalizes those that require large jumps, leading to more efficient and smoother exploration. My approach outperforms both random and greedy strategies, covering more unknown space with fewer, more efficient moves.
+                  </li>
+                </ul>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Strategy</th>
+                      <th>Reward Function</th>
+                      <th>Behavior</th>
+                      <th>Efficiency</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Random</td>
+                      <td>Random number</td>
+                      <td>Moves randomly</td>
+                      <td>Low</td>
+                    </tr>
+                    <tr>
+                      <td>Greedy</td>
+                      <td>Unknown voxels seen</td>
+                      <td>Maximizes immediate discovery</td>
+                      <td>Medium</td>
+                    </tr>
+                    <tr>
+                      <td>My Algorithm</td>
+                      <td>Unknown voxels - 0.5 × distance moved</td>
+                      <td>Balances discovery & efficiency</td>
+                      <td>High</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p><strong>Final Scores:</strong></p>
+                <ul>
+                    <li>Random score: 1712</li>
+                    <li>Greedy score: 1967</li>
+                    <li>My score: 2211</li>
+                </ul>
+                <p><strong>Score Evaluation:</strong> The score for each strategy is calculated based on the total area explored, the efficiency of the path taken, and the ability to avoid obstacles. Higher scores indicate better exploration coverage and more efficient navigation. My algorithm achieves the highest score, demonstrating superior performance in both coverage and path optimization compared to the Random and Greedy strategies.</p>
+                <h3>Discussion</h3>
+                <p>The project demonstrates the importance of balancing immediate exploration gains with long-term path planning. My algorithm's success lies in its ability to:</p>
+                <ul>
+                    <li>Consider both unknown space discovery and movement cost</li>
+                    <li>Maintain safe distances from obstacles</li>
+                    <li>Optimize for efficient coverage patterns</li>
+                </ul>
+                <p>The implementation provides a foundation for:</p>
+                <ul>
+                    <li>Autonomous robot navigation</li>
+                    <li>3D environment mapping</li>
+                    <li>Exploration strategy development</li>
+                    <li>Sensor-based decision making</li>
+                </ul>
+                <p>I developed my custom exploration algorithm, implemented the visualization system, and created the comparison framework for evaluating different strategies. The project showcases practical applications in robotics, autonomous systems, and environment mapping.</p>
+            </article>
+            <!-- /Article -->
+            <!-- Sidebar -->
+            <aside class="col-md-4 sidebar sidebar-left">
+                <div class="widget">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://www.open3d.org/">Open3D</a></li>
+                        <li><a href="https://github.com/isl-org/Open3D">Open3D GitHub</a></li>
+                        <li><a href="https://www.python.org/">Python</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Occupancy_grid_mapping">Occupancy Grid Mapping</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Depth_sensor">Depth Camera Sensors</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <!-- /Sidebar -->
+        </div>
+    </div>    <!-- /container -->
+</main>
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 widget">
+                <h3 class="widget-title">Contact</h3>
+                <div class="widget-body">
+                    <p>+5715461217<br>
+                        <a href="mailto:#">ysakhale@andrew.cmu.edu</a><br>
+                        <br>
+                        371 Spahr St, PA 
+                    </p>    
+                </div>
+            </div>
+            <div class="col-md-3 widget">
+                <h3 class="widget-title">Follow me</h3>
+                <div class="widget-body">
+                    <p class="follow-me-icons">
+                        <a href=""><i class="fa fa-twitter fa-2"></i></a>
+                        <a href=""><i class="fa fa-dribbble fa-2"></i></a>
+                        <a href=""><i class="fa fa-github fa-2"></i></a>
+                        <a href=""><i class="fa fa-facebook fa-2"></i></a>
+                    </p>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div> <!-- /row of widgets -->
+    </div>
+</footer>
+<footer id="underfooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 widget">
+                <div class="widget-body">
+                    <p class="text-right">
+                        Copyright &copy; 2025, Yash<br> 
+                        </p>
+                </div>
+            </div>
+        </div> <!-- /row of widgets -->
+    </div>
+</footer>
+<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html> 

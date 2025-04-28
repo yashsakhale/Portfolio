@@ -799,3 +799,6 @@ footer.entry-meta .meta-in {
     max-width: 1080px;
   }
 }
+.recentworks .col-md-4 {
+  margin-bottom: 40px;
+}

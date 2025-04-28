@@ -30,9 +30,15 @@ jQuery(document).ready(function($) {
 	sticky_navigation();
 	
 	// and run it again every time you scroll
-	$(window).scroll(function() {
+	$(window).on('scroll', function() {
 		 sticky_navigation();
 		 initio_parallax_animation();
+	});
+
+	// Run functions on resize
+	$(window).on('resize', function() {
+		sticky_navigation_offset_top = my_nav.offset().top;
+		sticky_navigation();
 	});
 
 });
