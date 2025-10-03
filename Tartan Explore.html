@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Campus Tour Optimization and Navigation System">
+	<meta name="author" content="Yash Sakhale">
+	
+	<title>Tartan Explore - Campus Tour Optimization System</title>
+
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Tartan Explore - Campus Tour Optimization System</h1>
+				</header>
+
+				<h3>Project Screenshots</h3>
+				<div style="margin-bottom: 30px;">
+					<h4>Campus Map and Landmark Selection</h4>
+					<img src="assets/images/tartan_screenshot_1.png" alt="Tartan Explore - Campus Map Interface" class="img-responsive" style="width: 100%; margin-bottom: 30px;">
+					
+					<h4>Route Optimization and Planning</h4>
+					<img src="assets/images/tartan_screenshot_2.png" alt="Tartan Explore - Route Optimization" class="img-responsive" style="width: 100%; margin-bottom: 30px;">
+					
+					<h4>Calendar Integration and Navigation</h4>
+					<img src="assets/images/tartan_screenshot_3.png" alt="Tartan Explore - Calendar Integration" class="img-responsive" style="width: 100%; margin-bottom: 30px;">
+				</div>
+
+				<h3>Project Overview</h3>
+				<p>Tartan Explore is a comprehensive web application designed to enhance the campus exploration experience for new visitors and students at Carnegie Mellon University. The system provides intelligent tour planning and optimization for over 100 campus landmarks, helping users discover the best routes and itinerary options based on their personal preferences and time constraints.</p>
+
+				<h3>Problem Statement</h3>
+				<p>New visitors and students often struggle to efficiently explore Carnegie Mellon's vast campus, lacking knowledge of key landmarks, optimal routes, and time management for comprehensive tours. Traditional paper maps or basic navigation apps fail to provide personalized, optimized experiences that consider user interests, time constraints, and landmark characteristics.</p>
+
+				<h3>Technical Implementation</h3>
+				
+				<h4>1. Landmark Database and Categorization</h4>
+				<ul>
+					<li>Curated database of 100+ campus landmarks with detailed information</li>
+					<li>Intelligent categorization system (academic buildings, recreational facilities, dining locations, historical sites)</li>
+					<li>User preference matching based on landmark categories and interests</li>
+				</ul>
+
+				<h4>2. Route Optimization Algorithm</h4>
+				<ul>
+					<li>Advanced pathfinding algorithms to calculate optimal routes</li>
+					<li>Distance and time optimization between selected landmarks</li>
+					<li>Multi-criteria optimization considering user preferences, time constraints, and landmark importance</li>
+					<li>Dynamic itinerary generation based on selected landmarks and available time</li>
+				</ul>
+
+				<h4>3. Google Maps Integration</h4>
+				<ul>
+					<li>Seamless integration with Google Maps API for real-time navigation</li>
+					<li>Interactive map visualization of campus landmarks and optimized routes</li>
+					<li>Turn-by-turn navigation directions</li>
+					<li>Live traffic updates and alternative route suggestions</li>
+				</ul>
+
+				<h4>4. Google Calendar Integration</h4>
+				<ul>
+					<li>Automated scheduling based on calculated exploration times</li>
+					<li>Time management for landmark visits</li>
+					<li>Conflict detection with existing calendar events</li>
+					<li>Reminder notifications for tour milestones</li>
+				</ul>
+
+				<h4>5. Time Calculation System</h4>
+				<ul>
+					<li>Accurate travel time computation between landmarks</li>
+					<li>Estimated exploration time for each landmark category</li>
+					<li>Dynamic duration adjustment based on user pace preferences</li>
+					<li>Buffer time integration for breaks and unforeseen delays</li>
+				</ul>
+
+				<h3>Key Features</h3>
+				<div class="row">
+					<div class="col-md-6">
+						<ul>
+							<li><strong>Smart Itinerary Planning:</strong> Automatic generation of optimized tour routes</li>
+							<li><strong>Personalized Recommendations:</strong> Custom suggestions based on user preferences</li>
+							<li><strong>Real-time Navigation:</strong> Live Google Maps integration with traffic updates</li>
+						</ul>
+					</div>
+					<div class="col-md-6">
+						<ul>
+							<li><strong>Calendar Management:</strong> Schedule coordination and time management</li>
+							<li><strong>Multi-stop Optimization:</strong> Efficient routing for multiple landmark visits</li>
+							<li><strong>Mobile-responsive Design:</strong> Accessible on all devices</li>
+						</ul>
+					</div>
+				</div>
+
+				<h3>Technical Stack</h3>
+				<ul>
+					<li><strong>Frontend:</strong> HTML5, CSS3, JavaScript (ES6+), Responsive Design</li>
+					<li><strong>Backend:</strong> Node.js, Express.js for API development</li>
+					<li><strong>Database:</strong> MongoDB for landmark data and user preferences</li>
+					<li><strong>APIs:</strong> Google Maps API, Google Calendar API</li>
+					<li><strong>Optimization:</strong> Custom algorithms for route planning and time calculation</li>
+					<li><strong>Deployment:</strong> Web hosting platform with domain configuration</li>
+				</ul>
+
+				<h3>User Experience Flow</h3>
+				<ol>
+					<li><strong>Interest Selection:</strong> Users choose categories of landmarks they want to explore</li>
+					<li><strong>Preference Input:</strong> Time constraints, walking pace, and specific landmarks</li>
+					<li><strong>Optimization:</strong> System calculates best route covering selected landmarks</li>
+					<li><strong>Itinerary Generation:</strong> Complete tour plan with timing and navigation details</li>
+					<li><strong>Integration:</strong> Automatic calendar scheduling and Google Maps navigation</li>
+					<li><strong>Real-time Updates:</strong> Live navigation and time adjustments during tour</li>
+				</ol>
+
+				<h3>Results and Impact</h3>
+				<ul>
+					<li>Significant improvement in campus exploration efficiency for new visitors</li>
+					<li>Personalized tour experiences tailored to individual interests</li>
+					<li>Optimized time management reducing wasted time and missed opportunities</li>
+					<li>Enhanced accessibility through comprehensive landmark documentation</li>
+					<li>Seamless integration of planning and execution phases</li>
+				</ul>
+
+				<h3>System Architecture</h3>
+				<p>The application follows a modular architecture with clear separation of concerns:</p>
+				<ul>
+					<li><strong>User Interface Layer:</strong> Responsive web interface for user interaction</li>
+					<li><strong>Application Logic Layer:</strong> Route optimization algorithms and business logic</li>
+					<li><strong>Data Management Layer:</strong> Landmark database and user preference storage</li>
+					<li><strong>Integration Layer:</strong> External API connections (Google Maps, Calendar)</li>
+					<li><strong>Performance Layer:</strong> Caching and optimization for real-time responses</li>
+				</ul>
+
+				<h3>Future Enhancements</h3>
+				<ul>
+					<li>Integration with university events and activities</li>
+					<li>Gamification elements for enhanced engagement</li>
+					<li>Social features for group tour planning</li>
+					<li>Augmented reality landmark identification</li>
+					<li>Analytics dashboard for usage patterns and optimization</li>
+				</ul>
+
+				<h3>Skills Demonstrated</h3>
+				<ul>
+					<li>Full-stack web development and architecture design</li>
+					<li>API integration with Google services</li>
+					<li>Algorithm development for optimization problems</li>
+					<li>User experience design and mobile responsiveness</li>
+					<li>Database design and data management</li>
+					<li>Project management and deployment</li>
+				</ul>
+
+				<h3>Conclusion</h3>
+				<p>Tartan Explore demonstrates my ability to create practical, user-focused solutions that address real-world problems. The project combines technical expertise in web development, algorithmic optimization, and API integration to deliver a comprehensive campus navigation system. This initiative showcases my skills in full-stack development, user experience design, and systematic problem-solving while providing genuine value to the Carnegie Mellon community.</p>
+
+				<p>The successful implementation of route optimization algorithms, seamless third-party integrations, and intuitive user interface highlights my proficiency in creating scalable web applications that solve complex logistical challenges while maintaining excellent user experience.</p>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Technologies Used</h4>
+					<ul>
+						<li><a href="https://developers.google.com/maps/documentation/javascript/get-api-key">Google Maps API</a>: Navigation Integration</li>
+						<li><a href="https://developers.google.com/calendar/api/quickstart">Google Calendar API</a>: Scheduling</li>
+						<li><a href="https://nodejs.org/">Node.js</a>: Backend Runtime</li>
+						<li><a href="https://expressjs.com/">Express.js</a>: Web Framework</li>
+						<li><a href="https://www.mongodb.com/">MongoDB</a>: Database</li>
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript ES6+</a>: Frontend Logic</li>
+					</ul>
+				</div>
+				
+				<div class="widget">
+					<h4>Key Features</h4>
+					<ul>
+						<li>100+ Campus Landmarks</li>
+						<li>Route Optimization</li>
+						<li>Real-time Navigation</li>
+						<li>Calendar Integration</li>
+						<li>Time Management</li>
+						<li>Mobile Responsive</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						371 Spahr St, PA
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

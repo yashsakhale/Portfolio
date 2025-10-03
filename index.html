@@ -16,6 +16,78 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
 	<!-- Custom styles -->
 	<link rel="stylesheet" href="assets/css/styles.css">
+	
+	<style>
+	.project-card {
+		background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+		border: 1px solid #e9ecef;
+		border-radius: 12px;
+		padding: 30px 20px;
+		text-align: center;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+		height: 280px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.project-card:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+		border-color: #007bff;
+	}
+	
+	.project-link {
+		text-decoration: none;
+		color: inherit;
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+	}
+	
+	.project-icon {
+		margin-bottom: 20px;
+		color: #007bff;
+	}
+	
+	.project-card h4 {
+		color: #2c3e50;
+		font-size: 18px;
+		font-weight: 600;
+		margin-bottom: 10px;
+	}
+	
+	.project-card p {
+		color: #6c757d;
+		font-size: 14px;
+		margin-bottom: 20px;
+		line-height: 1.4;
+	}
+	
+	.project-arrow {
+		color: #007bff;
+		font-size: 18px;
+		transition: transform 0.3s ease;
+	}
+	
+	.project-card:hover .project-arrow {
+		transform: translateX(5px);
+	}
+	
+	.drone-icon {
+		filter: hue-rotate(180deg) saturate(3) brightness(1.2) contrast(1.1);
+		-webkit-filter: hue-rotate(180deg) saturate(3) brightness(1.2) contrast(1.1);
+		transition: all 0.3s ease;
+	}
+	
+	.drone-icon:hover {
+		filter: hue-rotate(170deg) saturate(4) brightness(1.3);
+		-webkit-filter: hue-rotate(170deg) saturate(4) brightness(1.3);
+	}
+	</style>
 
 	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
 </head>
@@ -26,7 +98,7 @@
 		<h1 id="logo" class="text-center">
 			<img class="img-circle" src="assets/images/Yash.png" alt="" style="width:300px; height:300px;">
 			<span class="title">Yash Sakhale</span>
-			<span class="tagline">Graduate Researcher<br>
+			<span class="tagline">AI Engineering Intern & Final Semester Graduate Student<br>
 				<a href=""> Email:ysakhale@andrew.cmu.edu</a></span>
 		</h1>
 	</div> 
@@ -51,9 +123,13 @@
 			<div class="col-md-12">
 				<h2 class="section-title"><span>About me</span></h2>
 				<p class="lead text-center text-muted">
-					I am a graduate student at Carnegie Mellon University pursuing M.S in Artificial Intelligence - Mechanical Engineering.<br><br>
-					My interests lie in Deep learning architectures, specially the ones that are applied in Autonomous Vehicles. It does not end there! I am also exploring the emerging fields of Generative AI. <br><br>
-					Currently, I am a part of Carnegie Mellon University's Computational Engineering and Robotics Lab (CERLAB), and my industry-sponsored research project is simulating and modeling of LiDAR sensors - OS1 Ouster and Velodyne VLP, utilizing camera-lidar fusion and predictive models to filter or potentially eliminate dust particles from the point cloud data of an autonomous vehicle deployed on construction and mining sites.
+					I am currently in my final semester at Carnegie Mellon University pursuing M.S in Artificial Intelligence - Mechanical Engineering.<br><br>
+					
+					<strong>Professional Experience:</strong> I am honored to be an Artificial Intelligence Engineering Intern at Vigilant Inc. in Alexandria, Virginia (June 2025 - Present). My internship was extended due to exceptional performance, during which I engineered a REST API for multi-document ranking & quality control across 54,000+ articles and designed supporting network architecture for a MLOps-driven CI/CD pipeline on AWS using Docker and PostgreSQL. In a 48-hour sprint, I successfully prototyped a scalable global event monitoring system using PySpark, Playwright web-scraping, and LLMs to generate AI-driven summaries.<br><br>
+					
+					<strong>Academic Research:</strong> I continue to be part of Carnegie Mellon University's Computational Engineering and Robotics Lab (CERLAB), working on my industry-sponsored research project involving simulating and modeling of LiDAR sensors (OS1 Ouster and Velodyne VLP), utilizing camera-lidar fusion and predictive models to filter dust particles from point cloud data for autonomous vehicles deployed on construction and mining sites.<br><br>
+					
+					<strong>Areas of Expertise:</strong> Deep learning architectures for Autonomous Vehicles, Generative AI, Large Language Models, MLOps workflows, Cloud computing (AWS), REST API development, and real-time data processing systems.
 				</p>
 			</div>
 		</div> <!-- / section -->
@@ -85,64 +161,79 @@
 		<div class="row section recentworks topspace">
 			<h2 class="section-title"><span>Recent Works and Projects</span></h2>
 
-			<div class="row thumbnails recentworks">
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<a class="thumbnail" href="Quadcopter Exploration.html">
-						<span class="img">
-							<img src="assets/images/Carnegie-Mellon-University.jpg" alt="Quadcopter Exploration">
-							<span class="cover"><span class="more">See details &rarr;</span></span>
-						</span>
-						<span class="title">Quadcopter Exploration</span>
-					</a>
+			<div class="row" style="margin-top: 40px;">
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="Quadcopter Exploration.html" class="project-link">
+							<div class="project-icon">
+								<span style="font-size: 3em; filter: hue-rotate(220deg) saturate(2) brightness(0.9) contrast(1.2);">🚁</span>
+							</div>
+							<h4>Quadcopter Exploration</h4>
+							<p>Autonomous 3D Environment Mapping</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<a class="thumbnail" href="Lidar Dust Filter.html">
-						<span class="img">
-							<img src="assets/images/Carnegie-Mellon-University.jpg" alt="Lidar Dust Filter">
-							<span class="cover"><span class="more">See details &rarr;</span></span>
-						</span>
-						<span class="title">Lidar Dust Filter</span>
-					</a>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="Lidar Dust Filter.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-filter fa-3x"></i>
+							</div>
+							<h4>LiDAR Dust Filter</h4>
+							<p>ROS 2 Simulation & Point Cloud Analysis</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<a class="thumbnail" href="listenAI.html">
-						<span class="img">
-							<img src="assets/images/Carnegie-Mellon-University.jpg" alt="ListenAI">
-							<span class="cover"><span class="more">See details &rarr;</span></span>
-						</span>
-						<span class="title">ListenAI: Embedded Speech Detection</span>
-					</a>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="listenAI.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-microphone fa-3x"></i>
+							</div>
+							<h4>ListenAI</h4>
+							<p>Embedded Speech Detection</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
 				</div>
-			</div>
-			<div class="row thumbnails recentworks">
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<a class="thumbnail" href="NextGen Scholar Assistant.html">
-						<span class="img">
-							<img src="assets/images/Carnegie-Mellon-University.jpg" alt="Scholar Assistant">
-							<span class="cover"><span class="more">See details &rarr;</span></span>
-						</span>
-						<span class="title">NextGen Scholar Assistant</span>
-					</a>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="NextGen Scholar Assistant.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-graduation-cap fa-3x"></i>
+							</div>
+							<h4>NextGen Scholar Assistant</h4>
+							<p>Multilingual GenAI Research Tool</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<a class="thumbnail" href="Omniviz.html">
-						<span class="img">
-							<img src="assets/images/Carnegie-Mellon-University.jpg" alt="OmniViz">
-							<span class="cover"><span class="more">See details &rarr;</span></span>
-						</span>
-						<span class="title">OmniViz AI</span>
-					</a>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="Omniviz.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-comments fa-3x"></i>
+							</div>
+							<h4>OmniViz AI</h4>
+							<p>Multimodal GenAI Chatbot</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<a class="thumbnail" href="project1.html">
-						<span class="img">
-							<img src="assets/images/Carnegie-Mellon-University.jpg" alt="ScratchNet Project">
-							<span class="cover"><span class="more">See details &rarr;</span></span>
-						</span>
-						<span class="title">ScratchNet: CNNs & Detectors</span>
-					</a>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="Tartan Explore.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-map fa-3x"></i>
+							</div>
+							<h4>Tartan Explore</h4>
+							<p>Campus Tour Optimization System</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
 				</div>
-			</div>
 		</div>
 	</div>
 </main>
