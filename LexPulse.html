@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="GenAI course: Tokenization and LLM Application Design.">
+	<meta name="author" content="Yash Sakhale">
+	<title>LexPulse</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">LexPulse</h1>
+				</header>
+
+				<h3>Project Motivation &amp; Problem Statement</h3>
+				<p>Large Language Models (LLMs) have transformed natural language processing, but their performance is deeply influenced by how text is tokenized before being fed into the model. Tokenization strategies directly affect vocabulary size, sequence length, and ultimately model accuracy and efficiency. LexPulse explores the mechanics of tokenization algorithms and their impact on LLM application design, providing hands-on analysis of how different tokenization choices shape the behavior of generative AI systems.</p>
+				<p>Understanding tokenization is critical for anyone designing LLM-powered applications—from chatbots to search engines—because token boundaries affect everything from prompt engineering to API cost optimization.</p>
+
+				<h3>Technical Approach</h3>
+
+				<h4>1. Tokenization Algorithm Analysis</h4>
+				<ul>
+					<li>Implemented and compared major tokenization strategies including Byte-Pair Encoding (BPE), WordPiece, and SentencePiece to understand their strengths and trade-offs.</li>
+					<li>Analyzed how each tokenizer handles edge cases: rare words, multilingual text, code snippets, and special characters.</li>
+					<li>Measured token counts across different input types to understand cost implications when using token-based API pricing models.</li>
+				</ul>
+
+				<h4>2. Vocabulary and Embedding Space Exploration</h4>
+				<ul>
+					<li>Examined how vocabulary size affects model capacity and generalization by comparing tokenizers from GPT, BERT, and T5 model families.</li>
+					<li>Visualized token distributions and frequency patterns across different corpora to understand coverage and efficiency.</li>
+					<li>Explored subword segmentation behavior to understand how models handle out-of-vocabulary (OOV) words.</li>
+				</ul>
+
+				<h4>3. LLM Application Design Principles</h4>
+				<ul>
+					<li>Designed prompt templates and application architectures that account for token limits, context windows, and efficient token usage.</li>
+					<li>Built a Jupyter notebook implementing practical experiments on tokenization impact in LLM application workflows.</li>
+					<li>Evaluated how tokenization choices affect downstream tasks including text classification, summarization, and question answering.</li>
+				</ul>
+
+				<h4>4. Experimental Documentation</h4>
+				<ul>
+					<li>Organized comprehensive screenshots documenting experimental results for each analysis question.</li>
+					<li>Created reproducible notebook-based workflows enabling others to replicate and extend the analysis.</li>
+				</ul>
+
+				<h3>Results</h3>
+				<ul>
+					<li>Demonstrated measurable differences in token efficiency across tokenization algorithms for identical input text.</li>
+					<li>Identified optimal tokenization strategies for different application domains (conversational AI, code generation, multilingual support).</li>
+					<li>Produced actionable guidelines for LLM application design that minimize token waste and maximize context utilization.</li>
+					<li>Comprehensive analysis documented in notebooks with visual evidence of tokenization behavior.</li>
+				</ul>
+
+				<h3>Limitations</h3>
+				<ul>
+					<li>Analysis focused on publicly available tokenizers; proprietary model tokenizers may behave differently.</li>
+					<li>Tokenization impact was measured primarily on English text; broader multilingual evaluation would strengthen conclusions.</li>
+				</ul>
+
+				<h3>Skills and Technologies Demonstrated</h3>
+				<ul>
+					<li>NLP tokenization algorithm implementation and analysis</li>
+					<li>LLM application architecture design</li>
+					<li>Prompt engineering and token optimization</li>
+					<li>Jupyter notebook-based experimental workflows</li>
+					<li>Comparative analysis and technical documentation</li>
+					<li>Python scripting for NLP tasks</li>
+				</ul>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://platform.openai.com/tokenizer">OpenAI Tokenizer</a>: Token Visualization</li>
+						<li><a href="https://huggingface.co/docs/tokenizers/">Hugging Face Tokenizers</a>: Library</li>
+						<li><a href="https://arxiv.org/abs/1508.07909">BPE Paper</a>: Byte-Pair Encoding</li>
+						<li><a href="https://arxiv.org/abs/1808.06226">SentencePiece</a>: Subword Regularization</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						Aldie, Virginia 20105
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

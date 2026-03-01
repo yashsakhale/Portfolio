@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Production RAG Backend - Client Delivery. Retrieval-Augmented Generation with country-based filtering and GPT-4o fallback.">
+	<meta name="author" content="Yash Sakhale">
+	<title>RealProdRag</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">RealProdRag</h1>
+				</header>
+
+				<h3>Project Motivation &amp; Problem Statement</h3>
+				<p>Enterprise chatbots and knowledge assistants need to answer questions grounded in specific organizational documents—not general internet knowledge. Off-the-shelf LLMs often hallucinate or provide outdated information when asked domain-specific questions. RealProdRag is a production-ready Retrieval-Augmented Generation (RAG) system built for a real client delivery, designed to answer user queries by retrieving relevant documents from an ingested knowledge base and generating accurate, context-grounded responses with intelligent country-based filtering and GPT-4o fallback capabilities.</p>
+
+				<h3>Technical Approach</h3>
+
+				<h4>1. Document Ingestion Pipeline</h4>
+				<ul>
+					<li>Built an automated document ingestion system that processes PDFs, text files, and structured data into chunked, indexed representations.</li>
+					<li>Implemented intelligent chunking strategies (fixed-size with overlap, semantic boundary detection) to preserve context within each document segment.</li>
+					<li>Generated dense vector embeddings for each chunk using OpenAI's embedding models and stored them in a vector database for fast similarity search.</li>
+					<li>Designed the ingestion pipeline to support incremental updates—new documents can be added without reprocessing the entire corpus.</li>
+				</ul>
+
+				<h4>2. Retrieval &amp; Ranking System</h4>
+				<ul>
+					<li>Implemented semantic search using cosine similarity between query embeddings and document chunk embeddings for context-aware retrieval.</li>
+					<li>Built country-based metadata filtering that restricts search results to documents relevant to the user's geographic context, ensuring compliance with regional information policies.</li>
+					<li>Designed a re-ranking layer that combines semantic similarity scores with metadata relevance to surface the most pertinent chunks.</li>
+				</ul>
+
+				<h4>3. Generation &amp; Fallback Logic</h4>
+				<ul>
+					<li>Integrated OpenAI GPT-4o for response generation, feeding retrieved document chunks as context alongside the user's query.</li>
+					<li>Implemented confidence scoring on retrieved results—when retrieval confidence falls below a threshold, the system falls back to GPT-4o search preview for web-augmented answers.</li>
+					<li>Built prompt templates that instruct the model to cite sources, stay grounded in retrieved context, and explicitly state when information is unavailable.</li>
+				</ul>
+
+				<h4>4. API Architecture &amp; Backend</h4>
+				<ul>
+					<li>Developed a FastAPI backend with endpoints for document ingestion (<code>/ingest</code>), query processing (<code>/query</code>), and system health monitoring.</li>
+					<li>Implemented session management to support multi-turn conversations with context carryover.</li>
+					<li>Used SQL for metadata storage and query logging, enabling analytics on usage patterns and retrieval quality.</li>
+				</ul>
+
+				<h4>5. Deployment &amp; CI/CD</h4>
+				<ul>
+					<li>Containerized the entire system with Docker for consistent deployment across development, staging, and production environments.</li>
+					<li>Set up GitHub Actions workflows for automated testing, image building, and deployment on every code push.</li>
+					<li>Configured environment variables and secrets management for secure API key handling in production.</li>
+				</ul>
+
+				<h3>Results</h3>
+				<ul>
+					<li>Delivered a production RAG system that accurately answers domain-specific queries grounded in client documents.</li>
+					<li>Country-based filtering ensured regional compliance and relevance in multi-geography deployments.</li>
+					<li>GPT-4o fallback provided graceful degradation when retrieved documents didn't contain sufficient information.</li>
+					<li>Docker-based deployment and CI/CD pipeline enabled rapid iteration and reliable production releases.</li>
+				</ul>
+
+				<h3>Limitations</h3>
+				<ul>
+					<li>Retrieval quality depends heavily on the chunking strategy; suboptimal chunk boundaries can split critical context.</li>
+					<li>Embedding model may not capture domain-specific semantics as well as a fine-tuned model would.</li>
+					<li>Fallback to GPT-4o search introduces latency and may return information not aligned with client policies.</li>
+				</ul>
+
+				<h3>Skills and Technologies Demonstrated</h3>
+				<ul>
+					<li>Retrieval-Augmented Generation (RAG) system design</li>
+					<li>FastAPI production backend development</li>
+					<li>OpenAI API integration (embeddings and GPT-4o)</li>
+					<li>Vector database and semantic search implementation</li>
+					<li>Document ingestion and chunking pipelines</li>
+					<li>Docker containerization and GitHub Actions CI/CD</li>
+					<li>SQL for metadata management and logging</li>
+					<li>Client delivery and production deployment</li>
+				</ul>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://platform.openai.com/docs/">OpenAI API</a>: LLM &amp; Embeddings</li>
+						<li><a href="https://fastapi.tiangolo.com/">FastAPI</a>: Backend Framework</li>
+						<li><a href="https://docs.docker.com/">Docker</a>: Containerization</li>
+						<li><a href="https://github.com/features/actions">GitHub Actions</a>: CI/CD</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						Aldie, Virginia 20105
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

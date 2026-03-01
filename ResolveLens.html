@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="AI-powered tool for natural language explanations of Python dependency conflicts.">
+	<meta name="author" content="Yash Sakhale">
+	<title>ResolveLens</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">ResolveLens</h1>
+				</header>
+
+				<h3>Project Motivation &amp; Problem Statement</h3>
+				<p>Python dependency conflicts are one of the most frustrating and time-consuming issues developers face. Error messages from pip are often cryptic, providing version numbers and constraint violations without explaining <em>why</em> the conflict exists or <em>how</em> to resolve it. ResolveLens addresses this pain point by combining automated dependency conflict detection with AI-powered natural language explanations, transforming confusing error messages into clear, actionable guidance that helps developers resolve issues quickly and understand the underlying causes.</p>
+
+				<h3>Technical Approach</h3>
+
+				<h4>1. Dependency Parsing Engine</h4>
+				<ul>
+					<li>Built a custom dependency parser (<code>dependency_parser.py</code>) that reads requirements files and extracts package names, version specifiers, and constraint operators.</li>
+					<li>Resolved the full dependency tree by recursively analyzing transitive dependencies—packages required by your direct dependencies.</li>
+					<li>Handled complex version specifiers including ranges (<code>>=1.0,<2.0</code>), exact pins (<code>==1.5.3</code>), and compatibility releases (<code>~=1.4</code>).</li>
+				</ul>
+
+				<h4>2. Conflict Detection System</h4>
+				<ul>
+					<li>Implemented a conflict detector (<code>conflict_detector.py</code>) that compares version requirements across the entire dependency tree to identify incompatible constraints.</li>
+					<li>Detected multiple conflict types: direct version conflicts, transitive dependency clashes, Python version incompatibilities, and circular dependency chains.</li>
+					<li>Generated structured conflict reports with the specific packages, versions, and constraints involved in each conflict.</li>
+				</ul>
+
+				<h4>3. AI-Powered Explanation Engine</h4>
+				<ul>
+					<li>Developed an explanation engine (<code>explanation_engine.py</code>) that feeds structured conflict data to an LLM to generate human-readable explanations.</li>
+					<li>Explanations are organized into three sections: <strong>What</strong> the conflict is, <strong>Why</strong> it happens (technical root cause), and <strong>How to Fix</strong> it (specific actionable steps).</li>
+					<li>Prompt engineering ensures explanations are tailored to the developer's specific conflict rather than generic advice.</li>
+					<li>Included context about common resolution patterns: pinning versions, using virtual environments, finding alternative packages, or upgrading/downgrading.</li>
+				</ul>
+
+				<h4>4. Interactive UI with Streamlit</h4>
+				<ul>
+					<li>Built a Streamlit-based web interface (<code>app.py</code>) allowing users to paste their requirements file or upload it directly.</li>
+					<li>Real-time conflict analysis with immediate visual feedback on detected issues.</li>
+					<li>Collapsible explanation cards for each conflict, making it easy to navigate complex dependency situations.</li>
+					<li>Copy-to-clipboard functionality for suggested resolution commands.</li>
+				</ul>
+
+				<h3>Results</h3>
+				<ul>
+					<li>Successfully detects and explains common Python dependency conflicts that typically confuse developers.</li>
+					<li>AI-generated explanations significantly reduce debugging time compared to manually interpreting pip error messages.</li>
+					<li>Streamlit interface provides an accessible, no-installation-needed tool for local development use.</li>
+					<li>Modular architecture allows easy extension to support additional package managers (conda, poetry) in the future.</li>
+				</ul>
+
+				<h3>Limitations</h3>
+				<ul>
+					<li>Dependency resolution relies on locally available package metadata; some edge cases with private repositories or custom indexes may not be handled.</li>
+					<li>LLM explanations, while generally accurate, may occasionally suggest resolutions that don't account for project-specific constraints.</li>
+					<li>The tool currently focuses on pip-based workflows; conda and poetry support is planned but not yet implemented.</li>
+				</ul>
+
+				<h3>Skills and Technologies Demonstrated</h3>
+				<ul>
+					<li>Python dependency management and resolution algorithms</li>
+					<li>LLM integration for automated technical documentation</li>
+					<li>Streamlit web application development</li>
+					<li>Software architecture with modular, testable components</li>
+					<li>Developer tooling and DX (Developer Experience) design</li>
+					<li>Prompt engineering for technical explanation generation</li>
+				</ul>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://streamlit.io/">Streamlit</a>: Web UI Framework</li>
+						<li><a href="https://pip.pypa.io/en/stable/">pip</a>: Package Manager</li>
+						<li><a href="https://peps.python.org/pep-0440/">PEP 440</a>: Version Specifiers</li>
+						<li><a href="https://platform.openai.com/docs/">OpenAI API</a>: LLM Backend</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						Aldie, Virginia 20105
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

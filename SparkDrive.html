@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Machine learning with Apache Spark.">
+	<meta name="author" content="Yash Sakhale">
+	<title>SparkDrive</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">SparkDrive</h1>
+				</header>
+
+				<h3>Project Motivation &amp; Problem Statement</h3>
+				<p>Network intrusion detection is critical for cybersecurity, requiring ML models that can classify network traffic as normal or malicious at scale. The NSL-KDD dataset provides a benchmark for evaluating intrusion detection systems with 42 features capturing network connection characteristics. SparkDrive builds a complete ML pipeline using Apache Spark MLlib to train and evaluate classifiers on this dataset, demonstrating scalable feature engineering, hyperparameter tuning, and model evaluation techniques for cybersecurity applications.</p>
+
+				<h3>Technical Approach</h3>
+
+				<h4>1. Dataset: NSL-KDD Network Intrusion Data</h4>
+				<p>Used the NSL-KDD benchmark dataset with 42 columns representing network connection attributes:</p>
+				<ul>
+					<li><strong>Nominal Features (3):</strong> <code>protocol_type</code>, <code>service</code>, <code>flag</code> — categorical network protocol attributes.</li>
+					<li><strong>Binary Features (6):</strong> <code>land</code>, <code>logged_in</code>, <code>root_shell</code>, <code>su_attempted</code>, <code>is_host_login</code>, <code>is_guest_login</code> — boolean indicators.</li>
+					<li><strong>Continuous Features (32):</strong> Including <code>duration</code>, <code>src_bytes</code>, <code>dst_bytes</code>, <code>count</code>, <code>srv_count</code>, and various rate metrics (<code>serror_rate</code>, <code>rerror_rate</code>, etc.).</li>
+					<li><strong>Target:</strong> <code>class</code> column with "normal" vs. attack types, converted to binary outcome (0.0 = normal, 1.0 = attack).</li>
+				</ul>
+
+				<h4>2. Feature Engineering Pipeline</h4>
+				<p>Built a multi-stage Spark Pipeline for preprocessing heterogeneous feature types:</p>
+				<ul>
+					<li><strong>FeatureTypeCaster:</strong> Custom <code>Transformer</code> that casts all binary and continuous columns to <code>DoubleType</code> for numerical processing.</li>
+					<li><strong>StringIndexer:</strong> Converted nominal columns to numeric indices (<code>protocol_type_index</code>, <code>service_index</code>, <code>flag_index</code>).</li>
+					<li><strong>OneHotEncoder:</strong> Transformed indexed nominal columns to one-hot encoded vectors (<code>protocol_type_encoded</code>, etc.).</li>
+					<li><strong>VectorAssembler:</strong> Combined all continuous, binary, and one-hot features into a single <code>vectorized_features</code> column.</li>
+					<li><strong>StandardScaler:</strong> Normalized the feature vector to zero mean and unit variance, outputting final <code>features</code> column.</li>
+				</ul>
+
+				<h4>3. Custom Transformers</h4>
+				<ul>
+					<li><strong>OutcomeCreater:</strong> Custom transformer using UDF to convert <code>class</code> labels to binary outcome (normal=0.0, attack=1.0).</li>
+					<li><strong>ColumnDropper:</strong> Removes intermediate columns after pipeline processing, keeping only <code>features</code> and <code>outcome</code>.</li>
+				</ul>
+
+				<h4>4. Model Training with Cross-Validation</h4>
+				<ul>
+					<li><strong>Logistic Regression:</strong> Used <code>pyspark.ml.classification.LogisticRegression</code> as the classifier.</li>
+					<li><strong>Hyperparameter Grid:</strong> Searched over <code>regParam=[0.01, 0.1, 0.5]</code> and <code>maxIter=[10, 50, 100]</code> (9 parameter combinations).</li>
+					<li><strong>CrossValidator:</strong> 3-fold cross-validation with <code>BinaryClassificationEvaluator</code> using <code>areaUnderROC</code> metric.</li>
+					<li><strong>Best Model Selection:</strong> CrossValidator automatically selects the best hyperparameter combination based on validation AUC.</li>
+				</ul>
+
+				<h4>5. Model Evaluation</h4>
+				<ul>
+					<li><strong>Metrics:</strong> Evaluated using AUC-ROC on held-out test set (<code>KDDTest+.txt</code>).</li>
+					<li><strong>Output Inspection:</strong> Displayed <code>features</code>, <code>outcome</code>, <code>prediction</code>, and <code>probability</code> columns for result analysis.</li>
+					<li><strong>Schema Validation:</strong> Used <code>printSchema()</code> to verify pipeline output structure.</li>
+				</ul>
+
+				<h3>Implementation Details</h3>
+				<ul>
+					<li><strong>Data Files:</strong> <code>KDDTrain+.txt</code> (125,973 records) and <code>KDDTest+.txt</code> (22,544 records).</li>
+					<li><strong>Spark Configuration:</strong> Local mode with <code>master("local[*]")</code> for multi-core parallelism.</li>
+					<li><strong>Pipeline Stages:</strong> 8 stages total including 5 built-in transformers and 3 custom transformers.</li>
+					<li><strong>Null Handling:</strong> <code>dropna(subset=crucial_cols)</code> removes records with missing values in critical columns.</li>
+				</ul>
+
+				<h3>Results</h3>
+				<ul>
+					<li>Successfully built end-to-end ML pipeline from raw CSV data to trained classifier.</li>
+					<li>Cross-validation identified optimal hyperparameters from 9-combination grid search.</li>
+					<li>Pipeline architecture enables reproducible training with serializable model components.</li>
+					<li>Custom transformers demonstrate extensibility of Spark ML Pipeline API.</li>
+				</ul>
+
+				<h3>Limitations</h3>
+				<ul>
+					<li>Logistic Regression may underperform compared to ensemble methods (Random Forest, GBT) for this dataset.</li>
+					<li>Single-machine Spark mode; true scalability benefits require distributed cluster deployment.</li>
+					<li>Binary classification collapses attack types; multi-class formulation would provide finer-grained detection.</li>
+				</ul>
+
+				<h3>Skills and Technologies Demonstrated</h3>
+				<ul>
+					<li>Apache Spark MLlib Pipeline API</li>
+					<li>Custom Transformer development in PySpark</li>
+					<li>Feature engineering for heterogeneous data types</li>
+					<li>Hyperparameter tuning with CrossValidator</li>
+					<li>Binary classification with Logistic Regression</li>
+					<li>AUC-ROC evaluation metrics</li>
+					<li>Network intrusion detection domain knowledge</li>
+				</ul>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://spark.apache.org/docs/latest/ml-guide.html">Spark MLlib Guide</a>: ML Library</li>
+						<li><a href="https://spark.apache.org/docs/latest/api/python/">PySpark API</a>: Python Interface</li>
+						<li><a href="https://spark.apache.org/">Apache Spark</a>: Distributed Computing</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						Aldie, Virginia 20105
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

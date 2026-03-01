@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="TensorFlow and Kafka: streaming and ML.">
+	<meta name="author" content="Yash Sakhale">
+	<title>StreamFlow</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">StreamFlow</h1>
+				</header>
+
+				<h3>Project Motivation &amp; Problem Statement</h3>
+				<p>Real-time data processing is essential in domains like fraud detection, recommendation engines, and IoT monitoring, where insights must be generated within seconds of data arrival. Combining deep learning frameworks like TensorFlow with streaming platforms like Apache Kafka creates powerful architectures for real-time ML inference. StreamFlow explores this intersection—building TensorFlow neural networks for multi-class classification and integrating Kafka-based streaming pipelines for real-time YouTube analytics, demonstrating the techniques behind modern streaming ML systems.</p>
+
+				<h3>Technical Approach</h3>
+
+				<h4>1. TensorFlow Neural Network for Intrusion Detection</h4>
+				<p>Built a multi-class classifier using TensorFlow/Keras on the NSL-KDD network intrusion dataset.</p>
+				<ul>
+					<li><strong>Data Preprocessing:</strong> Reused Spark-based feature engineering pipeline from SparkDrive, then converted to TensorFlow tensors using <code>tf.constant()</code>.</li>
+					<li><strong>Model Architecture:</strong>
+						<pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+Dense(64, activation='relu', input_shape=(n_features,))
+Dense(64, activation='relu')
+Dense(32, activation='relu')
+Dense(5, activation='softmax')  # 5 attack categories</pre>
+					</li>
+					<li><strong>Training Configuration:</strong>
+						<ul>
+							<li>Optimizer: <code>Adam(learning_rate=0.001)</code></li>
+							<li>Loss: <code>SparseCategoricalCrossentropy(from_logits=False)</code></li>
+							<li>Metrics: <code>SparseCategoricalAccuracy</code></li>
+							<li>Epochs: 30 with batch_size=64</li>
+						</ul>
+					</li>
+					<li><strong>Data Split:</strong> Training set from <code>KDDTrain+.txt</code>; validation and test sets from 50/50 random split of <code>KDDTest+.txt</code>.</li>
+					<li><strong>TensorBoard Logging:</strong> Configured callbacks for training visualization with timestamped log directories.</li>
+				</ul>
+
+				<h4>2. Model Evaluation</h4>
+				<ul>
+					<li><strong>Test Metrics:</strong> Evaluated using <code>model.evaluate()</code> reporting test loss and accuracy.</li>
+					<li><strong>Predictions:</strong> Generated class predictions using <code>tf.argmax(y_pred, axis=1)</code> on softmax outputs.</li>
+					<li><strong>Classification Report:</strong> Used <code>sklearn.metrics.classification_report</code> for per-class precision, recall, and F1-score.</li>
+				</ul>
+
+				<h4>3. Kafka Streaming for YouTube Analytics</h4>
+				<p>Built a real-time streaming pipeline to analyze YouTube video engagement using Kafka.</p>
+				<ul>
+					<li><strong>Producer (<code>producer.py</code>):</strong>
+						<ul>
+							<li>Fetches video metadata using <code>YouTube Data API v3</code> via <code>googleapiclient.discovery.build()</code>.</li>
+							<li>Retrieves comment like counts using <code>commentThreads().list()</code> API endpoint.</li>
+							<li>Publishes video title and total likes to Kafka topic <code>topic_yt</code>.</li>
+							<li>Uses <code>confluent_kafka.Producer</code> with <code>bootstrap.servers='localhost:9092'</code>.</li>
+						</ul>
+					</li>
+					<li><strong>Consumer (<code>consumer.py</code>):</strong>
+						<ul>
+							<li>Subscribes to Kafka topic and aggregates likes per video in real-time.</li>
+							<li>Configured with <code>group.id='analytics'</code> and <code>auto.offset.reset='earliest'</code>.</li>
+							<li>Decodes message keys (video titles) and values (like counts) from UTF-8.</li>
+							<li>Reports the most-liked video after consumer termination.</li>
+						</ul>
+					</li>
+				</ul>
+
+				<h4>4. End-to-End System Integration</h4>
+				<ul>
+					<li><strong>Input:</strong> User provides up to 5 YouTube video IDs via command-line input.</li>
+					<li><strong>Processing:</strong> Producer fetches data from YouTube API, streams to Kafka, consumer aggregates in real-time.</li>
+					<li><strong>Output:</strong> Running totals displayed per video; final summary shows highest engagement video.</li>
+					<li><strong>Error Handling:</strong> Graceful handling of disabled comments and private videos with informative messages.</li>
+				</ul>
+
+				<h3>Implementation Details</h3>
+				<ul>
+					<li><strong>GCP Credentials:</strong> Service account JSON for YouTube API authentication.</li>
+					<li><strong>Kafka Broker:</strong> Local Kafka instance at <code>localhost:9092</code>.</li>
+					<li><strong>Spark-TensorFlow Bridge:</strong> Converted Spark DataFrames to pandas, then to TensorFlow tensors for model training.</li>
+					<li><strong>Feature Conversion:</strong> Used custom UDF to convert Spark ML vectors to arrays for TensorFlow compatibility.</li>
+				</ul>
+
+				<h3>Results</h3>
+				<ul>
+					<li>TensorFlow model successfully classifies network intrusion types across 5 categories.</li>
+					<li>Kafka pipeline demonstrates real-time message passing with producer/consumer pattern.</li>
+					<li>YouTube engagement analytics aggregated across multiple videos in streaming fashion.</li>
+					<li>Comprehensive documentation with numbered screenshots (<code>1.2.png</code>, <code>1.3.png</code>, <code>2.2.png</code>, <code>2.3.png</code>).</li>
+				</ul>
+
+				<h3>Limitations</h3>
+				<ul>
+					<li>Kafka runs in standalone mode; production requires multi-broker cluster for fault tolerance.</li>
+					<li>YouTube API has quota limits; high-volume usage requires quota management.</li>
+					<li>Model trained on NSL-KDD; real network data may have different feature distributions.</li>
+					<li>Consumer requires manual termination; production systems need graceful shutdown mechanisms.</li>
+				</ul>
+
+				<h3>Skills and Technologies Demonstrated</h3>
+				<ul>
+					<li>TensorFlow/Keras neural network design</li>
+					<li>Multi-class classification with softmax output</li>
+					<li>Apache Kafka producer/consumer architecture</li>
+					<li>confluent-kafka Python client</li>
+					<li>YouTube Data API v3 integration</li>
+					<li>Real-time streaming data pipelines</li>
+					<li>TensorBoard training visualization</li>
+					<li>Spark-to-TensorFlow data conversion</li>
+				</ul>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://www.tensorflow.org/api_docs">TensorFlow</a>: Deep Learning Framework</li>
+						<li><a href="https://kafka.apache.org/documentation/">Apache Kafka</a>: Streaming Platform</li>
+						<li><a href="https://kafka-python.readthedocs.io/">kafka-python</a>: Python Client</li>
+						<li><a href="https://www.tensorflow.org/guide/keras">Keras</a>: High-Level API</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						Aldie, Virginia 20105
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

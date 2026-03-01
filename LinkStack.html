@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="GenAI course: LLM Application Development with LangChain and Docker.">
+	<meta name="author" content="Yash Sakhale">
+	<title>LinkStack</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">LinkStack</h1>
+				</header>
+
+				<h3>Project Motivation &amp; Problem Statement</h3>
+				<p>Building production-quality LLM applications requires more than just calling an API—it demands careful orchestration of prompts, chains, memory, and tool usage. LangChain has emerged as the leading framework for composing LLM-powered workflows, but effectively leveraging its capabilities requires hands-on experience with chain composition, retrieval-augmented generation, and containerized deployment. LinkStack explores these patterns through three distinct LLM application implementations, each tackling a different aspect of real-world LLM application development.</p>
+
+				<h3>Technical Approach</h3>
+
+				<h4>1. Chain Composition &amp; Prompt Engineering</h4>
+				<ul>
+					<li>Built a LangChain-based application demonstrating sequential and parallel chain execution patterns.</li>
+					<li>Designed structured prompt templates with input variables, output parsers, and chain-of-thought reasoning to improve LLM response quality.</li>
+					<li>Implemented memory modules (ConversationBufferMemory, ConversationSummaryMemory) to maintain context across multi-turn interactions.</li>
+					<li>Containerized the application with Docker for consistent environment setup and reproducible execution.</li>
+				</ul>
+
+				<h4>2. Tool Integration &amp; Agent Design</h4>
+				<ul>
+					<li>Developed an LLM agent capable of dynamically selecting and executing external tools based on user queries.</li>
+					<li>Integrated custom tool definitions enabling the LLM to perform calculations, search operations, and data lookups beyond its training data.</li>
+					<li>Implemented agent reasoning loops with ReAct (Reasoning + Acting) patterns for transparent decision-making.</li>
+					<li>Built error handling and fallback mechanisms to gracefully manage tool execution failures.</li>
+				</ul>
+
+				<h4>3. Advanced LLM Application Pattern</h4>
+				<ul>
+					<li>Implemented a more complex LLM application combining retrieval, generation, and post-processing in a unified pipeline.</li>
+					<li>Designed modular application components that can be independently tested, updated, and recomposed.</li>
+					<li>Created Docker-based deployment configurations for each application, ensuring portability across development and production environments.</li>
+				</ul>
+
+				<h4>4. Containerized Deployment</h4>
+				<ul>
+					<li>Each application includes its own Dockerfile with optimized dependency installation and minimal image sizes.</li>
+					<li>Structured entrypoints (<code>main.py</code>) for clean application startup and configuration management.</li>
+					<li>Documented build and run instructions for seamless local development and deployment.</li>
+				</ul>
+
+				<h3>Results</h3>
+				<ul>
+					<li>Successfully implemented three distinct LLM application patterns demonstrating increasing complexity—from basic chains to tool-using agents.</li>
+					<li>Docker containerization ensured all applications run identically across different machines and environments.</li>
+					<li>Gained practical experience with LangChain's core abstractions: chains, agents, memory, tools, and output parsers.</li>
+					<li>Comprehensive documentation with screenshots for each implementation stage.</li>
+				</ul>
+
+				<h3>Limitations</h3>
+				<ul>
+					<li>Applications depend on external LLM API access; offline operation requires local model deployment.</li>
+					<li>Agent tool selection can be unpredictable for ambiguous queries, requiring careful prompt engineering.</li>
+					<li>Docker images include ML dependencies that increase build times and image sizes.</li>
+				</ul>
+
+				<h3>Skills and Technologies Demonstrated</h3>
+				<ul>
+					<li>LangChain framework for LLM application development</li>
+					<li>Prompt engineering and chain composition</li>
+					<li>LLM agent design with tool integration</li>
+					<li>Docker containerization and deployment</li>
+					<li>Python application architecture and modular design</li>
+					<li>Conversational AI memory management</li>
+				</ul>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://python.langchain.com/docs/get_started/introduction">LangChain</a>: LLM Framework</li>
+						<li><a href="https://docs.docker.com/">Docker</a>: Containerization</li>
+						<li><a href="https://platform.openai.com/docs/">OpenAI API</a>: LLM Backend</li>
+						<li><a href="https://arxiv.org/abs/2210.03629">ReAct Paper</a>: Agent Design Pattern</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						Aldie, Virginia 20105
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

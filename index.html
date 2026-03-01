@@ -87,6 +87,107 @@
 		filter: hue-rotate(170deg) saturate(4) brightness(1.3);
 		-webkit-filter: hue-rotate(170deg) saturate(4) brightness(1.3);
 	}
+	
+	/* More Projects Button */
+	.more-projects-btn {
+		background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+		color: white;
+		border: none;
+		padding: 15px 40px;
+		font-size: 18px;
+		font-weight: 600;
+		border-radius: 50px;
+		cursor: pointer;
+		transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+		position: relative;
+		overflow: hidden;
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+	}
+	
+	.more-projects-btn:hover {
+		transform: translateY(-3px) scale(1.05);
+		box-shadow: 0 8px 25px rgba(0, 123, 255, 0.5);
+		background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+	}
+	
+	.more-projects-btn:active {
+		transform: translateY(-1px) scale(1.02);
+	}
+	
+	.more-projects-btn i {
+		transition: transform 0.3s ease;
+	}
+	
+	.more-projects-btn:hover i {
+		transform: translateY(3px);
+	}
+	
+	.more-projects-btn.expanded i {
+		transform: rotate(180deg);
+	}
+	
+	.more-projects-btn.expanded:hover i {
+		transform: rotate(180deg) translateY(-3px);
+	}
+	
+	.more-projects-btn::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+		transition: left 0.5s ease;
+	}
+	
+	.more-projects-btn:hover::before {
+		left: 100%;
+	}
+	
+	.btn-container {
+		text-align: center;
+		margin: 40px 0 20px 0;
+	}
+	
+	/* Hidden Projects Container */
+	.hidden-projects {
+		max-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+					opacity 0.6s ease-in-out;
+	}
+	
+	.hidden-projects.revealed {
+		max-height: 3000px;
+		opacity: 1;
+	}
+	
+	/* Staggered Animation for Project Cards */
+	.hidden-projects .project-card {
+		opacity: 0;
+		transform: translateY(30px) scale(0.95);
+		transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	}
+	
+	.hidden-projects.revealed .project-card {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+	
+	.hidden-projects.revealed .col-xs-12:nth-child(1) .project-card { transition-delay: 0.1s; }
+	.hidden-projects.revealed .col-xs-12:nth-child(2) .project-card { transition-delay: 0.15s; }
+	.hidden-projects.revealed .col-xs-12:nth-child(3) .project-card { transition-delay: 0.2s; }
+	.hidden-projects.revealed .col-xs-12:nth-child(4) .project-card { transition-delay: 0.25s; }
+	.hidden-projects.revealed .col-xs-12:nth-child(5) .project-card { transition-delay: 0.3s; }
+	.hidden-projects.revealed .col-xs-12:nth-child(6) .project-card { transition-delay: 0.35s; }
+	.hidden-projects.revealed .col-xs-12:nth-child(7) .project-card { transition-delay: 0.4s; }
+	.hidden-projects.revealed .col-xs-12:nth-child(8) .project-card { transition-delay: 0.45s; }
+	.hidden-projects.revealed .col-xs-12:nth-child(9) .project-card { transition-delay: 0.5s; }
 	</style>
 
 	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
@@ -125,7 +226,7 @@
 				<p class="lead text-center text-muted">
 					I am currently in my final semester at Carnegie Mellon University pursuing M.S in Artificial Intelligence - Mechanical Engineering.<br><br>
 					
-					<strong>Professional Experience:</strong> I am honored to be an Artificial Intelligence Engineering Intern at Vigilant Inc. in Alexandria, Virginia (June 2025 - Present). My internship was extended due to exceptional performance, during which I engineered a REST API for multi-document ranking & quality control across 54,000+ articles and designed supporting network architecture for a MLOps-driven CI/CD pipeline on AWS using Docker and PostgreSQL. In a 48-hour sprint, I successfully prototyped a scalable global event monitoring system using PySpark, Playwright web-scraping, and LLMs to generate AI-driven summaries.<br><br>
+					<strong>Professional Experience:</strong> I started my journey as an Artificial Intelligence Intern at Vigilant Inc., a fast-paced startup in Alexandria, Virginia. From day one, I was responsible for building core AI components from scratch: designing, developing, and deploying production-grade systems for real-world applications. My work spanned the full lifecycle: prototyping, model training, backend integration, and shipping AI solutions to production. My rapid impact and ability to deliver results led to my transition into a full-time AI Engineer role, where I continue to architect and scale advanced AI systems for the company.<br><br>
 					
 					<strong>Academic Research:</strong> I continue to be part of Carnegie Mellon University's Computational Engineering and Robotics Lab (CERLAB), working on my industry-sponsored research project involving simulating and modeling of LiDAR sensors (OS1 Ouster and Velodyne VLP), utilizing camera-lidar fusion and predictive models to filter dust particles from point cloud data for autonomous vehicles deployed on construction and mining sites.<br><br>
 					
@@ -140,7 +241,7 @@
 				<div class="col-sm-6 col-md-3">
 					<h3 class="text-center">Resume</h3>
 					<p class="text-center">
-						<a href="https://docs.google.com/document/d/19IU6qpTttpANAH85zBM2Gy4FqghZeGAOt8VLC2fgvVY/edit?usp=sharing" target="_blank" class="btn btn-action">Drive Link</a>
+						<a href="https://docs.google.com/document/d/11odPgssyO4G75iyXKsABsqdt7ovg_sUIZatb7YT6xek/edit?usp=sharing" target="_blank" class="btn btn-action">Drive Link</a>
 					</p>
 				</div>
 				<div class="col-sm-6 col-md-3">
@@ -234,6 +335,174 @@
 						</a>
 					</div>
 				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="CloudAtlasClassifier.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-tags fa-3x"></i>
+							</div>
+							<h4>Cloud AtlasClassifier</h4>
+							<p>Serverless ML on AWS Lambda</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="DupZero.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-dedent fa-3x"></i>
+							</div>
+							<h4>DupZero</h4>
+							<p>Alert Processing &amp; Multi-stage Deduplication</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<!-- Button to reveal more projects -->
+				<div class="col-xs-12 btn-container">
+					<button class="more-projects-btn" onclick="toggleMoreProjects()">
+						<span id="btn-text">Explore More Projects</span>
+						<i class="fa fa-chevron-down"></i>
+					</button>
+				</div>
+			</div>
+
+			<!-- Hidden Projects Section -->
+			<div class="row hidden-projects" id="moreProjects">
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="RealProdRag.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-commenting-o fa-3x"></i>
+							</div>
+							<h4>RealProdRag</h4>
+							<p>Production RAG System &amp; Client Delivery</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="ResolveLens.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-question-circle fa-3x"></i>
+							</div>
+							<h4>ResolveLens</h4>
+							<p>AI-Powered Python Conflict Explanations</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="RouteRunner.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-wrench fa-3x"></i>
+							</div>
+							<h4>RouteRunner</h4>
+							<p>Streamlit GUI for Device Clustering &amp; API Testing</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="LexPulse.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-key fa-3x"></i>
+							</div>
+							<h4>LexPulse</h4>
+							<p>GenAI – Tokenization &amp; Application Design</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="LinkStack.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-code fa-3x"></i>
+							</div>
+							<h4>LinkStack</h4>
+							<p>GenAI – LangChain &amp; Docker</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="VectorLens.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-database fa-3x"></i>
+							</div>
+							<h4>VectorLens</h4>
+							<p>GenAI – RAG &amp; Multimodal LLM Apps</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="SparkQuery.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-table fa-3x"></i>
+							</div>
+							<h4>SparkQuery</h4>
+							<p>Data Systems – SQL on Spark &amp; Postgres</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="PipeFlow.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-cogs fa-3x"></i>
+							</div>
+							<h4>PipeFlow</h4>
+							<p>Data Pipelines &amp; ETL</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="SparkDrive.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-line-chart fa-3x"></i>
+							</div>
+							<h4>SparkDrive</h4>
+							<p>Machine Learning with Apache Spark</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="FlameStack.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-fire fa-3x"></i>
+							</div>
+							<h4>FlameStack</h4>
+							<p>Deep Learning with PyTorch</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+					<div class="project-card">
+						<a href="StreamFlow.html" class="project-link">
+							<div class="project-icon">
+								<i class="fa fa-bolt fa-3x"></i>
+							</div>
+							<h4>StreamFlow</h4>
+							<p>Streaming &amp; TensorFlow</p>
+							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </main>
@@ -247,7 +516,7 @@
 					<p>+5715461217<br>
 						<a href="mailto:#">ysakhale@andrew.cmu.edu</a><br>
 						<br>
-						371 Spahr St, PA 
+						Aldie, Virginia 20105 
 					</p>	
 				</div>
 			</div>
@@ -285,5 +554,30 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 <script src="assets/js/template.js"></script>
+<script>
+function toggleMoreProjects() {
+	var container = document.getElementById('moreProjects');
+	var btn = document.querySelector('.more-projects-btn');
+	var btnText = document.getElementById('btn-text');
+	
+	if (container.classList.contains('revealed')) {
+		container.classList.remove('revealed');
+		btn.classList.remove('expanded');
+		btnText.textContent = 'Explore More Projects';
+		// Smooth scroll back to button
+		setTimeout(function() {
+			btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}, 300);
+	} else {
+		container.classList.add('revealed');
+		btn.classList.add('expanded');
+		btnText.textContent = 'Show Less';
+		// Smooth scroll to reveal new content
+		setTimeout(function() {
+			container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}, 100);
+	}
+}
+</script>
 </body>
 </html>

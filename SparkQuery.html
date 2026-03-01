@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Data systems: SparkSQL and SQL on PostgreSQL.">
+	<meta name="author" content="Yash Sakhale">
+	<title>SparkQuery</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">SparkQuery</h1>
+				</header>
+
+				<h3>Project Motivation &amp; Problem Statement</h3>
+				<p>Querying and analyzing large datasets is a core skill in data engineering and analytics. While traditional SQL databases like PostgreSQL excel at transactional workloads, they struggle with large-scale analytical queries. Apache Spark SQL bridges this gap by enabling SQL-like queries over distributed datasets. SparkQuery explores both sides of this spectrum—ingesting real-time RSS feeds into PostgreSQL via Spark and leveraging Spark SQL for distributed analytical processing—building practical fluency in the query engines that power modern data platforms.</p>
+
+				<h3>Technical Approach</h3>
+
+				<h4>1. Real-Time RSS Feed Ingestion</h4>
+				<p>Built a data pipeline that fetches live news from Google News RSS feeds and persists to PostgreSQL.</p>
+				<ul>
+					<li><strong>RSS Parsing:</strong> Used both <code>xml.etree.ElementTree</code> and <code>feedparser</code> libraries to parse Google News RSS feeds, extracting title, link, pubDate, description, and source fields.</li>
+					<li><strong>Multi-Category Feeds:</strong> Configured feeds for three news categories—technology, business, and sports—using Google News search API endpoints.</li>
+					<li><strong>Spark DataFrame Creation:</strong> Converted parsed RSS data into Spark DataFrames using <code>spark.createDataFrame()</code> with <code>Row</code> objects for schema flexibility.</li>
+					<li><strong>Category Tagging:</strong> Added category metadata to each record enabling filtered analytics downstream.</li>
+				</ul>
+
+				<h4>2. PostgreSQL Integration via JDBC</h4>
+				<ul>
+					<li><strong>JDBC Connection:</strong> Configured Spark-PostgreSQL connectivity using <code>org.postgresql.Driver</code> with connection URL <code>jdbc:postgresql://localhost:5432/postgres</code>.</li>
+					<li><strong>Batch Writes:</strong> Used <code>DataFrame.write.jdbc()</code> with <code>mode='append'</code> to incrementally add new records to the <code>news</code> table.</li>
+					<li><strong>Direct SQL Execution:</strong> Implemented custom delete operations using <code>java.sql.DriverManager</code> for record filtering (e.g., removing NFL-related entries).</li>
+					<li><strong>Read-Back Validation:</strong> Verified data persistence by reading back from PostgreSQL using <code>spark.read.jdbc()</code>.</li>
+				</ul>
+
+				<h4>3. Time-Based Data Filtering</h4>
+				<ul>
+					<li><strong>Timestamp Parsing:</strong> Converted RSS pubDate strings to Spark timestamps using <code>to_timestamp()</code> with format pattern <code>"E, dd MMM yyyy HH:mm:ss Z"</code>.</li>
+					<li><strong>Recency Filtering:</strong> Implemented 24-hour filtering using <code>F.expr('INTERVAL 24 HOURS')</code> to extract only recent news articles.</li>
+					<li><strong>Legacy Time Parser:</strong> Configured <code>spark.sql.legacy.timeParserPolicy=LEGACY</code> to handle RFC 2822 date formats from RSS feeds.</li>
+				</ul>
+
+				<h4>4. Spark SQL Analytics</h4>
+				<ul>
+					<li><strong>Distinct Queries:</strong> Used Spark DataFrame operations like <code>.select('category').distinct()</code> for unique value extraction.</li>
+					<li><strong>Session Configuration:</strong> Configured SparkSession with <code>local[*]</code> master for multi-core parallel processing and extended network timeout (600s).</li>
+					<li><strong>SQL Functions:</strong> Leveraged <code>pyspark.sql.functions</code> (aliased as F) for column operations including <code>current_timestamp()</code>, <code>col()</code>, and <code>to_timestamp()</code>.</li>
+				</ul>
+
+				<h3>Implementation Details</h3>
+				<ul>
+					<li><strong>Spark Initialization:</strong> Used <code>findspark.init()</code> for Spark discovery and configured driver host as <code>127.0.0.1</code> for local development.</li>
+					<li><strong>Dual Context Setup:</strong> Created both <code>SparkContext</code> and <code>SQLContext</code> for RDD and DataFrame operations.</li>
+					<li><strong>Error Handling:</strong> Implemented try/finally blocks for JDBC connections ensuring proper resource cleanup.</li>
+					<li><strong>Schema Design:</strong> Designed news table with columns: title, link, pubDate, description, source/category.</li>
+				</ul>
+
+				<h3>Results</h3>
+				<ul>
+					<li>Successfully ingested real-time news from multiple Google News RSS feeds into PostgreSQL.</li>
+					<li>Implemented reliable JDBC-based data persistence with Spark DataFrame API.</li>
+					<li>Time-based filtering accurately isolates recent news within configurable time windows.</li>
+					<li>Category-based analytics enable news segmentation across technology, business, and sports domains.</li>
+					<li>Comprehensive documentation with numbered screenshots for each problem solution.</li>
+				</ul>
+
+				<h3>Limitations</h3>
+				<ul>
+					<li>RSS feed structure varies across sources; parser robustness required for production use.</li>
+					<li>Single-node Spark mode used; distributed cluster would improve throughput for high-volume feeds.</li>
+					<li>PostgreSQL credentials stored in code; environment-based configuration recommended for production.</li>
+				</ul>
+
+				<h3>Skills and Technologies Demonstrated</h3>
+				<ul>
+					<li>Apache Spark SQL and PySpark DataFrames</li>
+					<li>PostgreSQL JDBC integration</li>
+					<li>RSS feed parsing (feedparser, xml.etree.ElementTree)</li>
+					<li>Timestamp parsing and time-based filtering</li>
+					<li>Spark session configuration and context management</li>
+					<li>Real-time data ingestion pipelines</li>
+					<li>SQL operations via Spark DataFrame API</li>
+				</ul>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://spark.apache.org/sql/">Spark SQL</a>: Distributed SQL Engine</li>
+						<li><a href="https://www.postgresql.org/docs/">PostgreSQL</a>: Relational Database</li>
+						<li><a href="https://spark.apache.org/docs/latest/api/python/">PySpark API</a>: Python Interface</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						Aldie, Virginia 20105
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

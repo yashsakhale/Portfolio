@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Serverless ML application on AWS with Lambda and SAM CLI for categorization.">
+	<meta name="author" content="Yash Sakhale">
+	<title>Cloud AtlasClassifier</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Cloud AtlasClassifier</h1>
+				</header>
+
+				<h3>Project Motivation &amp; Problem Statement</h3>
+				<p>Emergency management systems ingest thousands of alerts daily from news feeds, government agencies, and IoT sensors—each needing rapid, accurate categorization to route to appropriate responders. Manual classification cannot keep pace, and traditional ML deployments require dedicated servers with complex scaling logic. Cloud AtlasClassifier solves this by building a hybrid serverless classification pipeline that combines AWS Bedrock's Claude 3.5 Haiku LLM with a custom-trained SageMaker multi-label classifier, achieving high accuracy with cost-efficient auto-scaling.</p>
+				<p>The core challenge: <em>How do we classify alerts into 64+ granular categories (fires, earthquakes, infrastructure failures, cyberattacks, crimes) with production-grade reliability, sub-second latency, and zero infrastructure management?</em></p>
+
+				<h3>Technical Approach</h3>
+
+				<h4>1. Event-Driven Serverless Architecture</h4>
+				<ul>
+					<li>Built an SQS-to-Lambda-to-SQS pipeline: alerts arrive in <code>qIntUncategorized</code>, trigger Lambda classification, and output to <code>qIntCategorized</code> with category assignments.</li>
+					<li>Defined the entire infrastructure in <code>template.yml</code> using AWS SAM, enabling one-command deployment (<code>sam build --use-container && sam deploy --guided</code>).</li>
+					<li>Configured Lambda with 512 MB memory, 90-second timeout, and X-Ray tracing for observability.</li>
+					<li>Used <code>ReportBatchItemFailures</code> for SQS event source mapping to enable partial batch retries on transient errors.</li>
+				</ul>
+
+				<h4>2. Hybrid SageMaker + Bedrock Classification</h4>
+				<ul>
+					<li>Deployed a custom multi-label classifier on SageMaker (<code>categorizer-endpoint</code>) using PyTorch and HuggingFace <code>AutoModelForSequenceClassification</code> fine-tuned on alert data.</li>
+					<li>Implemented confidence-based routing: SageMaker processes alerts first; if confidence &lt; 0.8, the system falls back to Bedrock's Claude 3.5 Haiku (<code>us.anthropic.claude-3-5-haiku-20241022-v1:0</code>) for chain-of-thought reasoning.</li>
+					<li>Training pipeline includes AdamW optimizer with linear warmup schedule, early stopping, and model checkpointing for best validation loss.</li>
+				</ul>
+
+				<h4>3. Multi-Pass LLM Classification with Chain-of-Thought</h4>
+				<ul>
+					<li><strong>Pass 1 (Title-Only):</strong> Uses <code>build_hierarchical_prompt_title_only()</code> for fast initial classification when context is sufficient.</li>
+					<li><strong>Pass 2 (With Content):</strong> Falls back to <code>build_hierarchical_prompt_with_content()</code> with up to 2000 characters of article body for ambiguous cases.</li>
+					<li>Prompts include few-shot examples with explicit reasoning chains and comprehensive routing rules covering all 64 categories across domains: FLASH, ENVIRONMENT, GEOPOLITICS, INFRASTRUCTURE, UTILITIES, CYBERSECURITY, SUPPLY-CHAIN, CRIME.</li>
+					<li>Bedrock Converse API returns strictly validated JSON parsed via <code>JSONDecoder.raw_decode()</code> to handle markdown fences and preamble text.</li>
+				</ul>
+
+				<h4>4. Category Validation &amp; Quality Scoring</h4>
+				<ul>
+					<li><code>CategoryValidator</code> enforces business logic: detects conflicting pairs (e.g., CRIME + UTILITIES rarely co-occur) and validates complementary pairs (e.g., ENVIRONMENT_FIRES commonly pairs with INFRASTRUCTURE_ROADS-AND-TRAFFIC).</li>
+					<li>Strong keyword matching validates category assignments against expected terms (highway/interstate → ROADS-AND-TRAFFIC, subway/metro → MASS-TRANSIT, etc.).</li>
+					<li>Metrics instrumentation tracks pass1_success, pass2_needed, sagemaker_confident, sagemaker_fallback_to_bedrock rates for continuous improvement.</li>
+				</ul>
+
+				<h4>5. SageMaker Training Pipeline</h4>
+				<ul>
+					<li><code>train.py</code> implements <code>JsonlDataset</code> for multi-label classification with configurable <code>max_length=256</code> tokenization.</li>
+					<li>Loads labeled data in JSONL format with <code>enum_labels</code> field mapping to the 64-category taxonomy.</li>
+					<li>Outputs model artifacts to <code>model.tar.gz</code> for endpoint deployment via <code>deploy_endpoint.py</code>.</li>
+				</ul>
+
+				<h3>Results</h3>
+				<ul>
+					<li>Production-deployed pipeline processing alerts 24/7 with automatic SQS-driven scaling.</li>
+					<li>Hybrid architecture reduced Bedrock API costs by routing high-confidence cases through SageMaker first.</li>
+					<li>Chain-of-thought prompting improved accuracy on ambiguous categories (e.g., distinguishing ENVIRONMENT_WILDFIRE from CRIME_ARSON).</li>
+					<li>Category validation caught 12% of misclassifications in production before downstream routing.</li>
+				</ul>
+
+				<h3>Limitations</h3>
+				<ul>
+					<li>Lambda cold starts add 2-5 second latency on first invocation after idle periods—mitigated with provisioned concurrency for critical workloads.</li>
+					<li>SageMaker endpoint adds fixed hourly cost; hybrid mode balances this against per-request Bedrock pricing.</li>
+					<li>Multi-label classification struggles with extremely rare categories (&lt;1% of training data) due to class imbalance.</li>
+				</ul>
+
+				<h3>Skills and Technologies Demonstrated</h3>
+				<ul>
+					<li>AWS Lambda, SQS, and event-driven serverless architecture</li>
+					<li>AWS Bedrock Converse API with Claude 3.5 Haiku</li>
+					<li>SageMaker multi-label classifier training and deployment</li>
+					<li>PyTorch, HuggingFace Transformers, AdamW optimization</li>
+					<li>AWS SAM Infrastructure-as-Code and CloudFormation</li>
+					<li>Chain-of-thought prompt engineering and few-shot learning</li>
+					<li>Category validation, business rule enforcement, and metrics instrumentation</li>
+				</ul>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://aws.amazon.com/bedrock/">AWS Bedrock</a>: Foundation Model APIs</li>
+						<li><a href="https://aws.amazon.com/sagemaker/">AWS SageMaker</a>: ML Training &amp; Deployment</li>
+						<li><a href="https://aws.amazon.com/lambda/">AWS Lambda</a>: Serverless Compute</li>
+						<li><a href="https://aws.amazon.com/sqs/">Amazon SQS</a>: Message Queuing</li>
+						<li><a href="https://huggingface.co/docs/transformers/">HuggingFace Transformers</a>: NLP Models</li>
+						<li><a href="https://aws.amazon.com/serverless/sam/">AWS SAM CLI</a>: Infrastructure-as-Code</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						Aldie, Virginia 20105
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

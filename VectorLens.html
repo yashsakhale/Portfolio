@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="GenAI course: LLM apps with vector stores and multimodality.">
+	<meta name="author" content="Yash Sakhale">
+	<title>VectorLens</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">VectorLens</h1>
+				</header>
+
+				<h3>Project Motivation &amp; Problem Statement</h3>
+				<p>As LLMs become central to intelligent applications, the ability to augment them with external knowledge through vector stores and handle multimodal inputs (text, images, audio) becomes critical. VectorLens explores advanced LLM application patterns—building Retrieval-Augmented Generation (RAG) systems powered by vector databases and extending LLM capabilities to process multimodal inputs, demonstrating the techniques that underpin modern AI products like knowledge assistants, visual Q&amp;A systems, and multimedia search engines.</p>
+
+				<h3>Technical Approach</h3>
+
+				<h4>1. Lecture-Based RAG System</h4>
+				<p>Built a Streamlit-based Q&amp;A application that ingests lecture PDFs and enables semantic search over academic content.</p>
+				<ul>
+					<li><strong>PDF Ingestion Pipeline:</strong> Used <code>PyPDF2.PdfReader</code> to extract and normalize text from 6 lecture PDF files, converting to lowercase and removing newlines for consistent processing.</li>
+					<li><strong>Document Chunking:</strong> Implemented <code>RecursiveCharacterTextSplitter</code> with <code>chunk_size=1000</code> and <code>chunk_overlap=200</code> to create semantically meaningful segments with context preservation at boundaries.</li>
+					<li><strong>Vector Store:</strong> Integrated <code>ChromaDB</code> with persistent storage (<code>./lecture_chroma_db</code>) and lecture-number metadata tagging for filtered retrieval.</li>
+					<li><strong>Embedding Model:</strong> Used Google Vertex AI's <code>text-embedding-004</code> model for generating dense vector representations of document chunks.</li>
+					<li><strong>Dual Retrieval:</strong> Implemented both <strong>MMR (Maximal Marginal Relevance)</strong> with <code>lambda_param=0.9</code> for diversity-aware retrieval and standard <strong>Similarity Search</strong>, with side-by-side comparison in the UI.</li>
+				</ul>
+
+				<h4>2. Multilingual Syllabus Analyzer</h4>
+				<p>Extended the RAG pipeline with Google Cloud Translation for cross-language document understanding.</p>
+				<ul>
+					<li><strong>Translation Integration:</strong> Integrated <code>Google Cloud Translation API v2</code> for real-time document translation across 4 languages: English, Spanish, French, and German.</li>
+					<li><strong>Chunk-Level Translation:</strong> Processed translations per chunk to handle API limits and maintain document structure across language conversion.</li>
+					<li><strong>Embedding Generation:</strong> Generated embeddings for translated chunks enabling cross-lingual semantic search capabilities.</li>
+					<li><strong>Streamlit UI:</strong> Built interactive interface with language selection dropdown and real-time translation display with truncated previews.</li>
+				</ul>
+
+				<h4>3. Multimodal Vision &amp; Audio Chatbot</h4>
+				<p>Built a containerized multimodal chatbot supporting image and audio inputs alongside text queries.</p>
+				<ul>
+					<li><strong>Vision Model:</strong> Integrated <code>Gemini 1.0 Pro Vision</code> via LangChain's <code>ChatVertexAI</code> with <code>temperature=0.7</code> and <code>max_output_tokens=1000</code> for image understanding.</li>
+					<li><strong>Image Processing:</strong> Uploaded images to <code>Google Cloud Storage</code> bucket and generated signed URLs (15-min expiration) for secure model access.</li>
+					<li><strong>Speech-to-Text:</strong> Used <code>Google Cloud Speech-to-Text API</code> with MP3 encoding at 44.1kHz sample rate for audio transcription.</li>
+					<li><strong>Combined Inference:</strong> Built context-aware pipeline that combines uploaded images with voice queries—audio transcriptions are used to query the currently loaded image for multimodal Q&amp;A.</li>
+					<li><strong>Docker Deployment:</strong> Containerized the application with <code>Dockerfile</code> for consistent deployment across environments.</li>
+				</ul>
+
+				<h3>Implementation Details</h3>
+				<ul>
+					<li><strong>GCP Project:</strong> Deployed on Google Cloud Platform with Vertex AI initialization for <code>us-central1</code> region.</li>
+					<li><strong>Authentication:</strong> Service account credentials via JSON key file for secure API access.</li>
+					<li><strong>Storage:</strong> GCS bucket for image/audio uploads with automatic signed URL generation.</li>
+					<li><strong>UI Framework:</strong> Streamlit for all three applications with session state management for cross-modal context sharing.</li>
+				</ul>
+
+				<h3>Results</h3>
+				<ul>
+					<li>RAG system successfully retrieves contextually relevant lecture content with MMR providing more diverse results than pure similarity search.</li>
+					<li>Translation pipeline handles full syllabus documents with per-chunk processing for API compliance.</li>
+					<li>Multimodal chatbot accurately describes image content and answers voice queries about uploaded images.</li>
+					<li>All three applications deployed with clean Streamlit interfaces and modular Python architecture.</li>
+				</ul>
+
+				<h3>Limitations</h3>
+				<ul>
+					<li>ChromaDB persistence requires local storage; cloud-hosted vector stores would improve scalability.</li>
+					<li>Translation quality depends on Google Translate; domain-specific terminology may require post-processing.</li>
+					<li>Gemini Vision model has input size limits; large images are resized before processing.</li>
+					<li>Audio transcription accuracy varies with recording quality and background noise.</li>
+				</ul>
+
+				<h3>Skills and Technologies Demonstrated</h3>
+				<ul>
+					<li>Google Vertex AI (text-embedding-004, Gemini 1.0 Pro Vision)</li>
+					<li>ChromaDB vector store with persistent storage</li>
+					<li>LangChain for RAG pipeline composition</li>
+					<li>Google Cloud APIs (Speech-to-Text, Translation, Storage)</li>
+					<li>Streamlit application development</li>
+					<li>Docker containerization for ML applications</li>
+					<li>MMR and similarity-based retrieval strategies</li>
+					<li>PDF processing with PyPDF2</li>
+				</ul>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://python.langchain.com/docs/get_started/introduction">LangChain</a>: LLM Framework</li>
+						<li><a href="https://www.trychroma.com/">ChromaDB</a>: Vector Store</li>
+						<li><a href="https://platform.openai.com/docs/">OpenAI API</a>: Embeddings &amp; LLMs</li>
+						<li><a href="https://docs.docker.com/">Docker</a>: Containerization</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						Aldie, Virginia 20105
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>

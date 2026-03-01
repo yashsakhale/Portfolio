@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Data engineering: pipelines and ETL.">
+	<meta name="author" content="Yash Sakhale">
+	<title>PipeFlow</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Yash Sakhale</span>
+			<span class="tagline">Graduate Researcher<br>
+				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
+		</h1>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+	<div class="container">
+		<div class="row topspace">
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">PipeFlow</h1>
+				</header>
+
+				<h3>Project Motivation &amp; Problem Statement</h3>
+				<p>Modern data-driven organizations rely on robust data pipelines to move, transform, and load data from diverse sources into analytical systems. Poorly designed ETL (Extract, Transform, Load) pipelines lead to data quality issues, processing bottlenecks, and unreliable downstream analytics. PipeFlow explores the fundamental principles and practical implementation of data engineering pipelines—building scalable, fault-tolerant ETL workflows that handle real-world data challenges including schema evolution, missing values, and large-scale transformations.</p>
+
+				<h3>Technical Approach</h3>
+
+				<h4>1. Data Extraction &amp; Source Integration</h4>
+				<ul>
+					<li>Implemented data extraction routines from multiple heterogeneous sources including CSV files, databases, and APIs.</li>
+					<li>Built configurable connectors that handle different data formats, encodings, and schema variations gracefully.</li>
+					<li>Implemented incremental extraction patterns to efficiently process only new or changed data rather than full reloads.</li>
+				</ul>
+
+				<h4>2. Data Transformation Pipeline</h4>
+				<ul>
+					<li>Designed multi-stage transformation pipelines using pandas and Python for cleaning, normalization, and feature engineering.</li>
+					<li>Implemented data quality checks at each transformation stage: null detection, type validation, referential integrity, and statistical outlier identification.</li>
+					<li>Built reusable transformation functions that can be composed into different pipeline configurations for varied use cases.</li>
+					<li>Applied aggregation, joining, and pivoting operations across multiple datasets to produce analytics-ready outputs.</li>
+				</ul>
+
+				<h4>3. Data Loading &amp; Storage</h4>
+				<ul>
+					<li>Implemented load strategies including full refresh, upsert, and append modes depending on the target use case.</li>
+					<li>Designed storage schemas optimized for both transactional queries and analytical workloads.</li>
+					<li>Built logging and audit trails to track data lineage through the entire pipeline lifecycle.</li>
+				</ul>
+
+				<h4>4. Pipeline Orchestration &amp; Monitoring</h4>
+				<ul>
+					<li>Structured pipelines with clear dependency graphs to ensure correct execution order across stages.</li>
+					<li>Implemented error handling with retry logic and dead-letter queues for failed records.</li>
+					<li>Added pipeline metrics collection for throughput, latency, and error rate monitoring.</li>
+				</ul>
+
+				<h4>5. Multi-Problem Implementation</h4>
+				<ul>
+					<li>Developed five distinct pipeline implementations (P1–P5), each addressing different data engineering challenges from basic ETL to complex multi-source joins.</li>
+					<li>Each problem includes Jupyter notebooks with detailed code, explanations, and output visualizations.</li>
+				</ul>
+
+				<h3>Results</h3>
+				<ul>
+					<li>Successfully built end-to-end ETL pipelines handling data extraction, transformation, and loading across multiple problem domains.</li>
+					<li>Transformation pipelines produced clean, validated datasets ready for analytical consumption.</li>
+					<li>Modular pipeline design allowed easy reconfiguration and extension for new data sources and transformations.</li>
+					<li>Comprehensive documentation with screenshots and notebook outputs for each problem.</li>
+				</ul>
+
+				<h3>Limitations</h3>
+				<ul>
+					<li>Pipelines were designed for batch processing; real-time streaming ETL would require architectural changes.</li>
+					<li>Scale testing was limited to moderate dataset sizes; production-scale data may require distributed frameworks like Apache Spark.</li>
+				</ul>
+
+				<h3>Skills and Technologies Demonstrated</h3>
+				<ul>
+					<li>ETL pipeline design and implementation</li>
+					<li>Data cleaning, transformation, and validation</li>
+					<li>Python data engineering with pandas and NumPy</li>
+					<li>Pipeline orchestration and error handling</li>
+					<li>Data quality assurance and monitoring</li>
+					<li>Jupyter-based analytical workflows</li>
+				</ul>
+			</article>
+
+			<aside class="col-md-4 sidebar sidebar-left">
+				<div class="widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="https://pandas.pydata.org/docs/">pandas</a>: Data Manipulation</li>
+						<li><a href="https://numpy.org/doc/">NumPy</a>: Numerical Computing</li>
+						<li><a href="https://jupyter.org/">Jupyter</a>: Interactive Notebooks</li>
+						<li><a href="https://en.wikipedia.org/wiki/Extract,_transform,_load">ETL Overview</a>: Concepts</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>+5715461217<br>
+						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
+						<br>
+						Aldie, Virginia 20105
+					</p>
+				</div>
+			</div>
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2025, Yash
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>
