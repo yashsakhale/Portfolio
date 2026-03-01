@@ -99,7 +99,7 @@
                   <li><strong>Random:</strong> Samples random actions in the x, y, and z directions near its current position. The reward for each possible action is just a random number. The robot moves without any regard for how much new area it will discover or how efficient its path is. This results in inefficient exploration, often revisiting known areas or making unnecessary moves.</li>
                   <li><strong>Greedy:</strong> Samples actions near its current position and evaluates each by counting the number of unknown voxels (unexplored space) it would see from that new pose. The reward is the number of unknown voxels visible from the new pose. The robot always chooses the action that immediately maximizes the discovery of new space, without considering the cost of movement. This is more efficient than random, but can get stuck in local maxima or make inefficient moves if a large unknown area is far away.</li>
                   <li><strong>My Algorithm:</strong> Like the greedy approach, my method samples actions near the current position and evaluates the number of unknown voxels visible from each new pose. However, I add a distance penalty to the reward function:<br>
-                    <code>Reward = (number of unknown voxels seen) - 0.5 Ã— (distance from current pose)</code><br>
+                    <code>Reward = (number of unknown voxels seen) - 0.5 Ã, (distance from current pose)</code><br>
                     The robot balances between maximizing the discovery of new space and minimizing unnecessary movement. It prefers actions that reveal new areas but penalizes those that require large jumps, leading to more efficient and smoother exploration. My approach outperforms both random and greedy strategies, covering more unknown space with fewer, more efficient moves.
                   </li>
                 </ul>
@@ -127,7 +127,7 @@
                     </tr>
                     <tr>
                       <td>My Algorithm</td>
-                      <td>Unknown voxels - 0.5 Ã— distance moved</td>
+                      <td>Unknown voxels - 0.5 Ã, distance moved</td>
                       <td>Balances discovery & efficiency</td>
                       <td>High</td>
                     </tr>
