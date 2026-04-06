@@ -1,198 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Production-grade alert processing with web scraping, classification, embeddings, and multi-stage deduplication.">
-	<meta name="author" content="Yash Sakhale">
-	<title>DupZero</title>
-	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
-	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
-	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
-	<link rel="stylesheet" href="assets/css/styles.css">
-	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DupZero - Yash Sakhale Portfolio">
+    <title>DupZero</title>
+    <link rel="shortcut icon" href="assets/images/Yash.png">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<header id="header">
-	<div id="head" class="parallax" parallax-speed="1">
-		<h1 id="logo" class="text-center">
-			<span class="title">Yash Sakhale</span>
-			<span class="tagline">Graduate Researcher<br>
-				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
-		</h1>
-	</div>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="index.html">Home</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-</header>
 
-<main id="main">
-	<div class="container">
-		<div class="row topspace">
-			<article class="col-sm-8 maincontent">
-				<header class="page-header">
-					<h1 class="page-title">DupZero</h1>
-				</header>
+<!-- Scroll Progress -->
+<div class="scroll-progress"></div>
 
-				<h3>Project Motivation &amp; Problem Statement</h3>
-				<p>Emergency alert systems ingest thousands of notifications daily from news feeds, government agencies, social media, and IoT sensors. A critical operational challenge is that 40-60% of alerts describe the same underlying event with different wording, timestamps, and metadata. This duplication overwhelms human operators and delays critical response decisions. DupZero is a production-grade ML deduplication system that eliminates redundant alerts through a multi-stage pipeline combining rule-based filtering, semantic embeddings, clustering, and diversity-aware selection.</p>
-				<p>The core challenge: <em>How do we accurately identify duplicate and near-duplicate alerts when they arrive from diverse sources with paraphrased content, different locations precision, and varying publication timestamps?</em></p>
+<!-- Background Effects -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+<div class="noise-overlay"></div>
+<div class="web-pattern"></div>
+<div class="cursor-glow"></div>
+<!-- Spider Web Strings -->
+<div class="web-strings">
+<div class="web-string"></div>
+<div class="web-string"></div>
+<div class="web-string"></div>
+<div class="web-string"></div>
+<div class="web-string"></div>
+</div>
+
+
+<!-- White Web Drift -->
+<div class="web-drift">
+<div class="web-strand"></div>
+<div class="web-strand"></div>
+<div class="web-strand"></div>
+<div class="web-strand"></div>
+<div class="web-strand"></div>
+<div class="web-strand"></div>
+</div>
+
+<!-- Web Corner Flickers -->
+<div class="web-flicker web-flicker-tl"></div>
+<div class="web-flicker web-flicker-tr"></div>
+<div class="web-flicker web-flicker-bl"></div>
+<div class="web-flicker web-flicker-br"></div>
+
+<!-- Spider Particles -->
+<div class="spider-particles">
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar-genz">
+    <a href="index.html" class="nav-logo">YS.</a>
+    <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="mailto:yash.sakhale23@gmail.com" class="nav-cta">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Project Hero -->
+<section class="project-hero">
+    <div class="container">
+        <a href="index.html#projects" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Projects
+        </a>
+        <h1>DupZero</h1>
+    </div>
+</section>
+
+<!-- Project Content -->
+<section class="project-content">
+    <div class="container">
+        <div class="project-content-grid">
+            <div class="project-main reveal">
+                <h3>Project Motivation &amp; Problem Statement</h3>
+				<p>Emergency and public safety alert systems generate massive volumes of notifications from multiple sources-news feeds, government agencies, social media, and IoT sensors. A significant challenge is that many of these alerts describe the same underlying event, leading to duplicate and near-duplicate entries that overwhelm operators and delay critical response times. DupZero was built to solve this problem: a production-grade alert processing system that intelligently deduplicates incoming alerts using modern NLP and ML techniques.</p>
+				<p>The core question this project addresses is: <em>How do we accurately identify and eliminate duplicate alerts when they arrive from diverse sources with different wording, formatting, and metadata?</em></p>
 
 				<h3>Technical Approach</h3>
 
-				<h4>1. Unified Service Architecture</h4>
+				<h4>1. Web Scraping &amp; Alert Ingestion</h4>
 				<ul>
-					<li>Built a FastAPI application (<code>main.py</code>, version 0.2.0) exposing endpoints for classification (<code>/classify</code>), deduplication (<code>/deduplicate</code>), and web scraping (<code>/scrape</code>).</li>
-					<li>Implemented async lifecycle management: startup initializes embedding models, validates PostgreSQL schema, and warms up Playwright browser instances; shutdown gracefully releases resources.</li>
-					<li>Containerized with Docker for consistent deployment, with <code>buildandpush.sh</code> automating ECR pushes for AWS deployment.</li>
+					<li>Built automated web scrapers to continuously ingest alerts from multiple public safety and emergency notification sources.</li>
+					<li>Implemented robust parsers to handle varied HTML structures, pagination, and rate limiting across different source websites.</li>
+					<li>Stored raw alert data with full metadata (timestamp, source, location, category) for downstream processing.</li>
 				</ul>
 
-				<h4>2. Five-Stage Deduplication Pipeline</h4>
+				<h4>2. Alert Classification Pipeline</h4>
 				<ul>
-					<li><strong>Stage 1 - Static Filter:</strong> <code>run_full_static_filter()</code> eliminates exact duplicates by <code>messageId</code> hash and filters stale alerts outside the configured cutoff window.</li>
-					<li><strong>Stage 2 - Embedding Pipeline:</strong> <code>run_embedding_pipeline()</code> generates 1024-dimensional vectors using BAAI/bge-m3 (or 128-dim via Matryoshka truncation with all-MiniLM-L6-v2) and stores in pgvector-enabled PostgreSQL.</li>
-					<li><strong>Stage 3 - DBSCAN Clustering:</strong> <code>run_dbscan_dedup(eps=0.2, min_samples=2, metric='cosine')</code> groups semantically similar alerts; refines clusters using exact GeoJSON coordinate matching for location-aware deduplication.</li>
-					<li><strong>Stage 4 - MMR3 Diversity Selection:</strong> Enhanced Maximal Marginal Relevance with quality metrics, recency scoring, and 5Ws coverage analysis (<code>check_5ws_coverage()</code>) selects the most informative alert from each cluster (λ=0.5).</li>
-					<li><strong>Stage 5 - Semantic Cross-Reference:</strong> <code>run_semantic_dedup(threshold=0.2)</code> compares incoming alerts against historical metadata table using pgvector's <code>&lt;=&gt;</code> cosine distance operator and PostGIS <code>ST_Equals()</code> for geo-filtering within configurable hours.</li>
+					<li>Developed a multi-label classification system using Hugging Face Transformers to categorize alerts by type (e.g., weather, fire, security, infrastructure).</li>
+					<li>Implemented FastAPI route handlers exposing classification endpoints for real-time and batch processing.</li>
+					<li>Used scikit-learn for baseline classifiers and ensemble methods during model development and evaluation.</li>
 				</ul>
 
-				<h4>3. Embedding Infrastructure</h4>
+				<h4>3. Embedding Generation &amp; Semantic Similarity</h4>
 				<ul>
-					<li>Sentence-Transformers models loaded via <code>get_model()</code> with native dimension verification against <code>NATIVE_DIMENSION</code> constant.</li>
-					<li>Supports multiple models: bge-m3 (1024d), all-MiniLM-L6-v2 (384→128d via Matryoshka), all-mpnet-base-v2 (768d), e5-small/base (384/768d).</li>
-					<li><code>encode_texts()</code> processes batches of 32 texts, applies L2 normalization after optional truncation, and returns float lists for database storage.</li>
-					<li>Embeddings stored in PostgreSQL <code>stEmbedding</code> column with pgvector extension for efficient similarity search.</li>
+					<li>Built an embedding pipeline using pre-trained transformer models to convert alert text into dense vector representations.</li>
+					<li>Computed cosine similarity and distance metrics between alert embeddings to identify semantically similar entries.</li>
+					<li>Leveraged PyTorch for efficient batch embedding computation on GPU when available.</li>
 				</ul>
 
-				<h4>4. Geo-Aware Deduplication</h4>
+				<h4>4. Multi-Stage Deduplication</h4>
 				<ul>
-					<li>Alerts include <code>areas</code> JSONB field containing GeoJSON point coordinates for location-based filtering.</li>
-					<li><code>_extract_point_geom_sql()</code> extracts coordinates via <code>ST_SetSRID(ST_GeomFromGeoJSON(areas-&gt;0-&gt;'point'), 4326)</code> for PostGIS spatial operations.</li>
-					<li>DBSCAN refinement step groups alerts by exact coordinate match within semantic clusters, preventing false deduplication of geographically distinct events.</li>
+					<li><strong>Stage 1 - Exact Match:</strong> Hash-based deduplication to instantly eliminate identical alerts.</li>
+					<li><strong>Stage 2 - Fuzzy Match:</strong> Text similarity scoring using token overlap and edit distance for near-duplicates.</li>
+					<li><strong>Stage 3 - Semantic Match:</strong> Embedding-based similarity to catch paraphrased or differently-worded duplicates.</li>
+					<li>Configurable threshold parameters at each stage to tune precision vs. recall based on operational requirements.</li>
 				</ul>
 
-				<h4>5. MMR3 Quality Scoring</h4>
+				<h4>5. API Architecture &amp; Deployment</h4>
 				<ul>
-					<li><code>run_enhanced_mmr3_filter()</code> scores alerts within clusters using composite metrics: summary quality, named entity extraction (spaCy NER when available), timestamp recency, and content completeness.</li>
-					<li><code>calculate_recency_score()</code> applies exponential decay favoring recent alerts; <code>compute_summary_metrics()</code> validates informational coverage.</li>
-					<li>Results logged to file via <code>log_results_to_file()</code> for offline analysis and threshold tuning.</li>
-				</ul>
-
-				<h4>6. Web Scraping &amp; Alert Enrichment</h4>
-				<ul>
-					<li>Two-stage extraction: <code>stage_0_http_extractor.py</code> for static HTML, <code>stage_1_playwright_extractor.py</code> for JavaScript-rendered content.</li>
-					<li>API endpoints: <code>/scrape/extract</code> (single URL), <code>/scrape/batch</code> (bulk), <code>/scrape/alert</code> (enrichment with classification).</li>
-					<li><code>/scrape/metrics</code> exposes extraction success rates, latency percentiles, and failure categorization for operational monitoring.</li>
+					<li>Structured the backend with FastAPI, exposing endpoints for classification (<code>/classify</code>), deduplication (<code>/deduplicate</code>), and scraper management (<code>/scrape</code>).</li>
+					<li>Containerized the entire system with Docker for reproducible deployments across environments.</li>
+					<li>Set up GitHub Actions CI/CD pipeline for automated testing, building, and deployment on every push.</li>
+					<li>Integrated observability tooling for monitoring pipeline health, throughput, and deduplication metrics.</li>
 				</ul>
 
 				<h3>Results</h3>
 				<ul>
-					<li>Production system processing alerts for Vigilant's emergency management platform with 99.7% uptime.</li>
-					<li>Five-stage pipeline reduced duplicate alerts by 58% compared to single-method approaches.</li>
-					<li>Geo-aware DBSCAN refinement eliminated false positives where semantically similar alerts described geographically distinct events.</li>
-					<li>MMR3 quality scoring ensured retained alerts had the most complete, recent, and informative content.</li>
+					<li>Achieved end-to-end alert ingestion, classification, and deduplication in a single automated pipeline.</li>
+					<li>Multi-stage deduplication significantly reduced duplicate alerts compared to single-method approaches.</li>
+					<li>Semantic embedding stage caught paraphrased duplicates that exact and fuzzy matching missed entirely.</li>
+					<li>Containerized deployment enabled consistent operation across development, staging, and production environments.</li>
 				</ul>
 
 				<h3>Limitations</h3>
 				<ul>
-					<li>Embedding model inference adds 50-200ms latency per batch; GPU acceleration not available in current deployment.</li>
-					<li>Matryoshka dimension truncation trades some semantic fidelity for storage efficiency—fine-tuning thresholds required per use case.</li>
-					<li>Playwright browser instances consume significant memory; concurrent scraping limited to prevent OOM conditions.</li>
-					<li>DBSCAN eps/min_samples tuning requires domain expertise—values optimized for emergency alerts may not generalize.</li>
+					<li>Embedding model performance depends on the domain specificity of the pre-trained model; fine-tuning on alert-specific corpora could improve accuracy.</li>
+					<li>Web scraping is inherently fragile-source website changes can break parsers and require maintenance.</li>
+					<li>Real-time deduplication at very high throughput may require distributed processing beyond a single container.</li>
 				</ul>
 
 				<h3>Skills and Technologies Demonstrated</h3>
 				<ul>
-					<li>Production FastAPI service design with async lifecycle management</li>
-					<li>Sentence-Transformers and Matryoshka Representation Learning</li>
-					<li>DBSCAN clustering with cosine distance and coordinate refinement</li>
-					<li>Maximal Marginal Relevance (MMR) with quality metrics</li>
-					<li>PostgreSQL with pgvector extension for embedding similarity search</li>
-					<li>PostGIS spatial operations for geo-aware filtering</li>
-					<li>Playwright browser automation for JavaScript rendering</li>
-					<li>Docker containerization and AWS ECR deployment</li>
-					<li>spaCy NER and NLP quality analysis</li>
+					<li>Production API design with FastAPI</li>
+					<li>NLP and text embedding with Hugging Face Transformers and PyTorch</li>
+					<li>Multi-stage deduplication algorithm design</li>
+					<li>Web scraping and data ingestion automation</li>
+					<li>Docker containerization and GitHub Actions CI/CD</li>
+					<li>Observability and metrics instrumentation</li>
+					<li>End-to-end ML pipeline development</li>
 				</ul>
-			</article>
-
-			<aside class="col-md-4 sidebar sidebar-left">
-				<div class="widget">
+            </div>
+            <div class="project-sidebar">
+                <div class="widget-genz">
 					<h4>Resources</h4>
 					<ul>
-						<li><a href="https://fastapi.tiangolo.com/">FastAPI</a>: Async Web Framework</li>
-						<li><a href="https://www.sbert.net/">Sentence-Transformers</a>: Embedding Models</li>
-						<li><a href="https://github.com/pgvector/pgvector">pgvector</a>: PostgreSQL Vector Extension</li>
-						<li><a href="https://postgis.net/">PostGIS</a>: Spatial Database</li>
-						<li><a href="https://scikit-learn.org/stable/modules/clustering.html#dbscan">scikit-learn DBSCAN</a>: Clustering Algorithm</li>
-						<li><a href="https://playwright.dev/python/">Playwright</a>: Browser Automation</li>
-						<li><a href="https://spacy.io/">spaCy</a>: NLP &amp; NER</li>
-						<li><a href="https://huggingface.co/BAAI/bge-m3">BAAI/bge-m3</a>: Embedding Model</li>
+						<li><a href="https://fastapi.tiangolo.com/">FastAPI</a>: Backend Framework</li>
+						<li><a href="https://huggingface.co/docs/transformers/">Hugging Face Transformers</a>: NLP Models</li>
+						<li><a href="https://pytorch.org/">PyTorch</a>: Deep Learning</li>
+						<li><a href="https://scikit-learn.org/">scikit-learn</a>: ML Utilities</li>
+						<li><a href="https://playwright.dev/">Playwright</a>: Web Scraping &amp; Testing</li>
+						<li><a href="https://docs.docker.com/">Docker</a>: Containerization</li>
 					</ul>
 				</div>
-			</aside>
-		</div>
-	</div>
-</main>
+            </div>
+        </div>
+    </div>
+</section>
 
-<footer id="footer">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3 widget">
-				<h3 class="widget-title">Contact</h3>
-				<div class="widget-body">
-					<p>+5715461217<br>
-						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
-						<br>
-						Aldie, Virginia 20105
-					</p>
-				</div>
-			</div>
-			<div class="col-md-3 widget">
-				<h3 class="widget-title">Follow me</h3>
-				<div class="widget-body">
-					<p class="follow-me-icons">
-						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
-						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
-						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
-						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<hr class="section-divider">
+
+<!-- Footer -->
+<footer class="footer-genz">
+    <div class="container">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Yash Sakhale. All rights reserved.</p>
+            <p><a href="index.html">Back to Home</a></p>
+        </div>
+    </div>
 </footer>
 
-<footer id="underfooter">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 widget">
-				<div class="widget-body">
-					<p class="text-right">
-						Copyright &copy; 2025, Yash
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="assets/js/template.js"></script>
+<!-- Back to Top -->
+<button class="back-to-top" aria-label="Back to top">
+	<i class="fa-solid fa-arrow-up"></i>
+</button>
+
 </body>
 </html>

@@ -2,582 +2,438 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	
-	<title>Yash Sakhale</title>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Yash Sakhale - AI Engineer Portfolio">
+	<title>Yash Sakhale - AI Engineer</title>
 	<link rel="shortcut icon" href="assets/images/Yash.png">
-	<!-- Bootstrap -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Icons -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<!-- Fonts -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
-	<!-- Custom styles -->
-	<link rel="stylesheet" href="assets/css/styles.css">
-	
-	<style>
-	.project-card {
-		background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-		border: 1px solid #e9ecef;
-		border-radius: 12px;
-		padding: 30px 20px;
-		text-align: center;
-		transition: all 0.3s ease;
-		box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-		height: 280px;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-	}
-	
-	.project-card:hover {
-		transform: translateY(-8px);
-		box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-		border-color: #007bff;
-	}
-	
-	.project-link {
-		text-decoration: none;
-		color: inherit;
-		flex-grow: 1;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		height: 100%;
-	}
-	
-	.project-icon {
-		margin-bottom: 20px;
-		color: #007bff;
-	}
-	
-	.project-card h4 {
-		color: #2c3e50;
-		font-size: 18px;
-		font-weight: 600;
-		margin-bottom: 10px;
-	}
-	
-	.project-card p {
-		color: #6c757d;
-		font-size: 14px;
-		margin-bottom: 20px;
-		line-height: 1.4;
-	}
-	
-	.project-arrow {
-		color: #007bff;
-		font-size: 18px;
-		transition: transform 0.3s ease;
-	}
-	
-	.project-card:hover .project-arrow {
-		transform: translateX(5px);
-	}
-	
-	.drone-icon {
-		filter: hue-rotate(180deg) saturate(3) brightness(1.2) contrast(1.1);
-		-webkit-filter: hue-rotate(180deg) saturate(3) brightness(1.2) contrast(1.1);
-		transition: all 0.3s ease;
-	}
-	
-	.drone-icon:hover {
-		filter: hue-rotate(170deg) saturate(4) brightness(1.3);
-		-webkit-filter: hue-rotate(170deg) saturate(4) brightness(1.3);
-	}
-	
-	/* More Projects Button */
-	.more-projects-btn {
-		background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-		color: white;
-		border: none;
-		padding: 15px 40px;
-		font-size: 18px;
-		font-weight: 600;
-		border-radius: 50px;
-		cursor: pointer;
-		transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
-		position: relative;
-		overflow: hidden;
-		display: inline-flex;
-		align-items: center;
-		gap: 10px;
-	}
-	
-	.more-projects-btn:hover {
-		transform: translateY(-3px) scale(1.05);
-		box-shadow: 0 8px 25px rgba(0, 123, 255, 0.5);
-		background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
-	}
-	
-	.more-projects-btn:active {
-		transform: translateY(-1px) scale(1.02);
-	}
-	
-	.more-projects-btn i {
-		transition: transform 0.3s ease;
-	}
-	
-	.more-projects-btn:hover i {
-		transform: translateY(3px);
-	}
-	
-	.more-projects-btn.expanded i {
-		transform: rotate(180deg);
-	}
-	
-	.more-projects-btn.expanded:hover i {
-		transform: rotate(180deg) translateY(-3px);
-	}
-	
-	.more-projects-btn::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-		transition: left 0.5s ease;
-	}
-	
-	.more-projects-btn:hover::before {
-		left: 100%;
-	}
-	
-	.btn-container {
-		text-align: center;
-		margin: 40px 0 20px 0;
-	}
-	
-	/* Hidden Projects Container */
-	.hidden-projects {
-		max-height: 0;
-		overflow: hidden;
-		opacity: 0;
-		transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-					opacity 0.6s ease-in-out;
-	}
-	
-	.hidden-projects.revealed {
-		max-height: 3000px;
-		opacity: 1;
-	}
-	
-	/* Staggered Animation for Project Cards */
-	.hidden-projects .project-card {
-		opacity: 0;
-		transform: translateY(30px) scale(0.95);
-		transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	}
-	
-	.hidden-projects.revealed .project-card {
-		opacity: 1;
-		transform: translateY(0) scale(1);
-	}
-	
-	.hidden-projects.revealed .col-xs-12:nth-child(1) .project-card { transition-delay: 0.1s; }
-	.hidden-projects.revealed .col-xs-12:nth-child(2) .project-card { transition-delay: 0.15s; }
-	.hidden-projects.revealed .col-xs-12:nth-child(3) .project-card { transition-delay: 0.2s; }
-	.hidden-projects.revealed .col-xs-12:nth-child(4) .project-card { transition-delay: 0.25s; }
-	.hidden-projects.revealed .col-xs-12:nth-child(5) .project-card { transition-delay: 0.3s; }
-	.hidden-projects.revealed .col-xs-12:nth-child(6) .project-card { transition-delay: 0.35s; }
-	.hidden-projects.revealed .col-xs-12:nth-child(7) .project-card { transition-delay: 0.4s; }
-	.hidden-projects.revealed .col-xs-12:nth-child(8) .project-card { transition-delay: 0.45s; }
-	.hidden-projects.revealed .col-xs-12:nth-child(9) .project-card { transition-delay: 0.5s; }
-	</style>
-
-	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+	<link rel="stylesheet" href="assets/css/styles.css?v=1775512506">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
-<body class="home">
+<body>
 
-<header id="header">
-	<div id="head" class="parallax" parallax-speed="2">
-		<h1 id="logo" class="text-center">
-			<img class="img-circle" src="assets/images/Yash.png" alt="" style="width:300px; height:300px;">
-			<span class="title">Yash Sakhale</span>
-			<span class="tagline">AI Engineering<br>
-				<a href="mailto:yash.sakhale23@gmail.com"> Email:yash.sakhale23@gmail.com</a></span>
-		</h1>
-	</div> 
+<!-- Scroll Progress -->
+<div class="scroll-progress"></div>
 
-	<nav class="navbar navbar-default navbar-sticky">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-			</div>
-			
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-				</ul>
-			</div><!--/.nav-collapse -->			
-		</div>	
-	</nav>
-</header>
+<!-- Loader -->
+<div class="page-loader">
+	<div class="loader-spider">
+		<div class="spider-eye spider-eye-left"></div>
+		<div class="spider-eye spider-eye-right"></div>
+	</div>
+</div>
 
-<main id="main">
+<!-- Background Effects -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+<div class="noise-overlay"></div>
+<div class="web-pattern"></div>
+<div class="cursor-glow"></div>
+
+<!-- Spider Web Strings -->
+<div class="web-strings">
+	<div class="web-string"></div>
+	<div class="web-string"></div>
+	<div class="web-string"></div>
+	<div class="web-string"></div>
+	<div class="web-string"></div>
+</div>
+
+<!-- White Web Drift -->
+<div class="web-drift">
+	<div class="web-strand"></div>
+	<div class="web-strand"></div>
+	<div class="web-strand"></div>
+	<div class="web-strand"></div>
+	<div class="web-strand"></div>
+	<div class="web-strand"></div>
+</div>
+
+<!-- Web Corner Flickers -->
+<div class="web-flicker web-flicker-tl"></div>
+<div class="web-flicker web-flicker-tr"></div>
+<div class="web-flicker web-flicker-bl"></div>
+<div class="web-flicker web-flicker-br"></div>
+
+<!-- Spider Particles -->
+<div class="spider-particles">
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar-genz">
+	<a href="index.html" class="nav-logo">YS.</a>
+	<button class="nav-toggle" aria-label="Menu">
+		<span></span><span></span><span></span>
+	</button>
+	<ul class="nav-links">
+		<li><a href="#about">About</a></li>
+		<li><a href="#docs">Resume</a></li>
+		<li><a href="#projects">Projects</a></li>
+		<li><a href="mailto:yash.sakhale23@gmail.com" class="nav-cta">Contact</a></li>
+	</ul>
+	<button class="symbiote-toggle" aria-label="Toggle Symbiote Mode" title="Symbiote Mode">
+		<i class="fa-solid fa-mask"></i>
+	</button>
+</nav>
+
+<!-- Spidey Photo Mode -->
+<button class="spidey-photo-btn" aria-label="Take Screenshot" title="Spidey Photo Mode">
+	<i class="fa-solid fa-camera-retro"></i>
+</button>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+	<div class="web-radial"></div>
+	<div class="spider-sense"></div>
+	<div class="spider-sense"></div>
+	<div class="spider-sense"></div>
+	<div class="hero-content">
+		<div class="hero-avatar-wrap">
+			<div class="web-ring"></div>
+			<div class="web-ring"></div>
+			<div class="web-ring"></div>
+			<img src="assets/images/Yash.png" alt="Yash Sakhale" class="hero-avatar">
+		</div>
+		<div class="hero-badge">
+			<span class="dot"></span> Available for opportunities
+		</div>
+		<h1>Hi, I'm <span class="gradient-text">Yash Sakhale</span></h1>
+		<p class="hero-subtitle">Anyone can wear the mask. Not everyone debugs at 3 AM. Hi I am your friendly neighborhood AI engineer who slings models instead of webs.</p>
+		<div class="hero-actions">
+			<a href="#projects" class="btn-primary-genz">
+				View Projects <i class="fa-solid fa-arrow-down"></i>
+			</a>
+			<a href="https://docs.google.com/document/d/1gaXexbcxFXkBodSMNBcdhGPLr4EjoGiqdmYOFyPA94k/edit?usp=sharing" target="_blank" class="btn-secondary-genz">
+				Resume <i class="fa-solid fa-arrow-up-right-from-square"></i>
+			</a>
+		</div>
+	</div>
+	<div class="scroll-indicator">
+		<div class="mouse"></div>
+		<span>Scroll</span>
+	</div>
+</section>
+
+<!-- Daily Bugle Ticker (Top) -->
+<div class="bugle-ticker bugle-ticker-top">
+	<div class="bugle-label"><i class="fa-solid fa-newspaper"></i> DAILY BUGLE</div>
+	<div class="bugle-track">
+		<div class="bugle-scroll">
+			<span>BREAKING: CMU grad Yash Sakhale builds 19+ production AI systems</span>
+			<span>EXCLUSIVE: Autonomous quadcopter maps 3D environments without human input</span>
+			<span>DEVELOPING: New LiDAR dust filter revolutionizes point cloud analysis</span>
+			<span>ALERT: ListenAI brings embedded speech detection to edge devices</span>
+			<span>SHOCKING: Multimodal GenAI chatbot OmniViz processes text, image & audio</span>
+			<span>REPORT: RAG-powered NextGen Scholar Assistant helps researchers worldwide</span>
+			<span>BREAKING: CMU grad Yash Sakhale builds 19+ production AI systems</span>
+			<span>EXCLUSIVE: Autonomous quadcopter maps 3D environments without human input</span>
+			<span>DEVELOPING: New LiDAR dust filter revolutionizes point cloud analysis</span>
+			<span>ALERT: ListenAI brings embedded speech detection to edge devices</span>
+			<span>SHOCKING: Multimodal GenAI chatbot OmniViz processes text, image & audio</span>
+			<span>REPORT: RAG-powered NextGen Scholar Assistant helps researchers worldwide</span>
+		</div>
+	</div>
+</div>
+
+<hr class="section-divider">
+
+<!-- About -->
+<section class="section-genz" id="about">
 	<div class="container">
-		<div class="row section topspace">
-			<div class="col-md-12">
-				<h2 class="section-title"><span>About me</span></h2>
-				<p class="lead text-center text-muted">
-					I graduated from Carnegie Mellon University with an M.S in Artificial Intelligence - Mechanical Engineering.<br><br>
-					
-					<strong>Professional Experience:</strong> I started my journey as an Artificial Intelligence Intern at Vigilant Inc., a fast-paced startup in Alexandria, Virginia. From day one, I was responsible for building core AI components from scratch: designing, developing, and deploying production-grade systems for real-world applications. My work spanned the full lifecycle: prototyping, model training, backend integration, and shipping AI solutions to production. My rapid impact and ability to deliver results led to my transition into a full-time AI Engineer role, where I continue to architect and scale advanced AI systems for the company.<br><br>
-					
-					<strong>Academic Research:</strong> I was a part of Carnegie Mellon University's Computational Engineering and Robotics Lab (CERLAB), where I worked on my industry-sponsored research project involving simulating and modeling of LiDAR sensors (OS1 Ouster and Velodyne VLP), utilizing camera-lidar fusion and predictive models to filter dust particles from point cloud data for autonomous vehicles deployed on construction and mining sites.<br><br>
-					
-					<strong>Areas of Expertise:</strong> Deep learning architectures for Autonomous Vehicles, Generative AI, Large Language Models, MLOps workflows, Cloud computing (AWS), REST API development, and real-time data processing systems.
-				</p>
-			</div>
-		</div> <!-- / section -->
-		
-		<div class="row section featured topspace">
-			<h2 class="section-title"><span>Resume and other Supplement Documents</span></h2>
-			<div class="row">
-				<div class="col-sm-6 col-md-3">
-					<h3 class="text-center">Resume</h3>
-					<p class="text-center">
-						<a href="https://docs.google.com/document/d/1gaXexbcxFXkBodSMNBcdhGPLr4EjoGiqdmYOFyPA94k/edit?usp=sharing" target="_blank" class="btn btn-action">Drive Link</a>
-					</p>
+		<div class="section-header reveal">
+			<div class="section-label">About Me</div>
+			<h2 class="section-title-genz">Building <span class="highlight">Intelligent Systems</span></h2>
+		</div>
+		<div class="about-grid">
+			<div class="stat-cards reveal">
+				<div class="stat-card">
+					<div class="stat-number">CMU</div>
+					<div class="stat-label">M.S. AI-ME</div>
 				</div>
-				<div class="col-sm-6 col-md-3">
-					<h3 class="text-center">Recommendations</h3>
-					<p class="text-center"><a href="https://drive.google.com/drive/folders/13gOHLB2V9ye-hY3cmp8PynKfd0MsPBIv?usp=sharing" class="btn btn-action">Drive Link</a></p>
+				<div class="stat-card">
+					<div class="stat-number">19+</div>
+					<div class="stat-label">Projects</div>
 				</div>
-				<div class="col-sm-6 col-md-3">
-					<h3 class="text-center">Github Link</h3>
-					<p class="text-center"><a href="https://github.com/yashsakhale/yashsakhale" class="btn btn-action">Git Link</a></p>
+				<div class="stat-card">
+					<div class="stat-number">AI</div>
+					<div class="stat-label">Engineer @ Vigilant</div>
 				</div>
-				<div class="col-sm-6 col-md-3">
-					<h3 class="text-center">Certificates </h3>
-					<p class="text-center"><a href="https://drive.google.com/drive/folders/11S-l6yq_nryli48UV9oXk8tm2zv48TOP?usp=drive_link" class="btn btn-action">Drive Link</a></p>
+				<div class="stat-card">
+					<div class="stat-number">Full</div>
+					<div class="stat-label">Stack AI</div>
 				</div>
 			</div>
-		</div> <!-- / section -->
-	
-		<div class="row section recentworks topspace">
-			<h2 class="section-title"><span>Recent Works and Projects</span></h2>
-
-			<div class="row" style="margin-top: 40px;">
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="Quadcopter Exploration.html" class="project-link">
-							<div class="project-icon">
-								<span style="font-size: 3em; filter: hue-rotate(220deg) saturate(2) brightness(0.9) contrast(1.2);">🚁</span>
-							</div>
-							<h4>Quadcopter Exploration</h4>
-							<p>Autonomous 3D Environment Mapping</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="Lidar Dust Filter.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-filter fa-3x"></i>
-							</div>
-							<h4>LiDAR Dust Filter</h4>
-							<p>ROS 2 Simulation & Point Cloud Analysis</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="listenAI.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-microphone fa-3x"></i>
-							</div>
-							<h4>ListenAI</h4>
-							<p>Embedded Speech Detection</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="NextGen Scholar Assistant.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-graduation-cap fa-3x"></i>
-							</div>
-							<h4>NextGen Scholar Assistant</h4>
-							<p>Multilingual GenAI Research Tool</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="Omniviz.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-comments fa-3x"></i>
-							</div>
-							<h4>OmniViz AI</h4>
-							<p>Multimodal GenAI Chatbot</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="Tartan Explore.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-map fa-3x"></i>
-							</div>
-							<h4>Tartan Explore</h4>
-							<p>Campus Tour Optimization System</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="CloudAtlasClassifier.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-tags fa-3x"></i>
-							</div>
-							<h4>Cloud AtlasClassifier</h4>
-							<p>Serverless ML on AWS Lambda</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="DupZero.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-dedent fa-3x"></i>
-							</div>
-							<h4>DupZero</h4>
-							<p>Alert Processing &amp; Multi-stage Deduplication</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<!-- Button to reveal more projects -->
-				<div class="col-xs-12 btn-container">
-					<button class="more-projects-btn" onclick="toggleMoreProjects()">
-						<span id="btn-text">Explore More Projects</span>
-						<i class="fa fa-chevron-down"></i>
-					</button>
-				</div>
-			</div>
-
-			<!-- Hidden Projects Section -->
-			<div class="row hidden-projects" id="moreProjects">
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="RealProdRag.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-commenting-o fa-3x"></i>
-							</div>
-							<h4>RealProdRag</h4>
-							<p>Production RAG System &amp; Client Delivery</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="ResolveLens.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-question-circle fa-3x"></i>
-							</div>
-							<h4>ResolveLens</h4>
-							<p>AI-Powered Python Conflict Explanations</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="RouteRunner.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-wrench fa-3x"></i>
-							</div>
-							<h4>RouteRunner</h4>
-							<p>Streamlit GUI for Device Clustering &amp; API Testing</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="LexPulse.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-key fa-3x"></i>
-							</div>
-							<h4>LexPulse</h4>
-							<p>GenAI – Tokenization &amp; Application Design</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="LinkStack.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-code fa-3x"></i>
-							</div>
-							<h4>LinkStack</h4>
-							<p>GenAI – LangChain &amp; Docker</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="VectorLens.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-database fa-3x"></i>
-							</div>
-							<h4>VectorLens</h4>
-							<p>GenAI – RAG &amp; Multimodal LLM Apps</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="SparkQuery.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-table fa-3x"></i>
-							</div>
-							<h4>SparkQuery</h4>
-							<p>Data Systems – SQL on Spark &amp; Postgres</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="PipeFlow.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-cogs fa-3x"></i>
-							</div>
-							<h4>PipeFlow</h4>
-							<p>Data Pipelines &amp; ETL</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="SparkDrive.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-line-chart fa-3x"></i>
-							</div>
-							<h4>SparkDrive</h4>
-							<p>Machine Learning with Apache Spark</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="FlameStack.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-fire fa-3x"></i>
-							</div>
-							<h4>FlameStack</h4>
-							<p>Deep Learning with PyTorch</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
-					<div class="project-card">
-						<a href="StreamFlow.html" class="project-link">
-							<div class="project-icon">
-								<i class="fa fa-bolt fa-3x"></i>
-							</div>
-							<h4>StreamFlow</h4>
-							<p>Streaming &amp; TensorFlow</p>
-							<span class="project-arrow"><i class="fa fa-arrow-right"></i></span>
-						</a>
-					</div>
+			<div class="about-text reveal reveal-delay-2">
+				<p>AI Engineer crafting production-grade AI systems, deep learning architectures, and GenAI applications.</p>
+				<p>I graduated from <strong>Carnegie Mellon University</strong> with an M.S in Artificial Intelligence, Mechanical Engineering.</p>
+				<p><strong>Professional Experience:</strong> I started my journey as an AI Intern at <strong>Vigilant Inc.</strong>, a fast-paced startup in Alexandria, Virginia. From day one, I built core AI components from scratch: designing, developing, and deploying production-grade systems. My rapid impact led to my transition into a full-time <strong>AI Engineer</strong> role, where I continue to architect and scale advanced AI systems.</p>
+				<p><strong>Academic Research:</strong> At CMU's <strong>CERLAB</strong>, I worked on simulating and modeling LiDAR sensors, utilizing camera-lidar fusion and predictive models to filter dust particles from point cloud data for autonomous vehicles on construction and mining sites.</p>
+				<div class="expertise-pills">
+					<span class="pill">Deep Learning</span>
+					<span class="pill blue">Generative AI</span>
+					<span class="pill">LLMs</span>
+					<span class="pill blue">MLOps</span>
+					<span class="pill">AWS</span>
+					<span class="pill blue">REST APIs</span>
+					<span class="pill">Autonomous Vehicles</span>
+					<span class="pill blue">Real-time Systems</span>
 				</div>
 			</div>
 		</div>
 	</div>
-</main>
+</section>
 
-<footer id="footer">
+<hr class="section-divider">
+
+<!-- Documents -->
+<section class="section-genz" id="docs">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-3 widget">
-				<h3 class="widget-title">Contact</h3>
-				<div class="widget-body">
-					<p>+5715461217<br>
-						<a href="mailto:yash.sakhale23@gmail.com">yash.sakhale23@gmail.com</a><br>
-						<br>
-						Aldie, Virginia 20105 
-					</p>	
-				</div>
+		<div class="section-header reveal">
+			<div class="section-label">Resources</div>
+			<h2 class="section-title-genz">Resume & <span class="highlight">Documents</span></h2>
+		</div>
+		<div class="doc-grid reveal">
+			<div class="doc-card">
+				<div class="doc-icon"><i class="fa-solid fa-file-lines"></i></div>
+				<h3>Resume</h3>
+				<a href="https://docs.google.com/document/d/1gaXexbcxFXkBodSMNBcdhGPLr4EjoGiqdmYOFyPA94k/edit?usp=sharing" target="_blank" class="btn-secondary-genz btn-sm">View</a>
 			</div>
+			<div class="doc-card">
+				<div class="doc-icon"><i class="fa-solid fa-star"></i></div>
+				<h3>Recommendations</h3>
+				<a href="https://drive.google.com/drive/folders/13gOHLB2V9ye-hY3cmp8PynKfd0MsPBIv?usp=sharing" target="_blank" class="btn-secondary-genz btn-sm">View</a>
+			</div>
+			<div class="doc-card">
+				<div class="doc-icon"><i class="fa-solid fa-certificate"></i></div>
+				<h3>Certificates</h3>
+				<a href="https://drive.google.com/drive/folders/11S-l6yq_nryli48UV9oXk8tm2zv48TOP?usp=drive_link" target="_blank" class="btn-secondary-genz btn-sm">View</a>
+			</div>
+		</div>
+	</div>
+</section>
 
-			<div class="col-md-3 widget">
-				<h3 class="widget-title">Follow me</h3>
-				<div class="widget-body">
-					<p class="follow-me-icons">
-						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
-						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
-						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
-						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
-					</p>
+<hr class="section-divider">
+
+<!-- Projects -->
+<section class="section-genz" id="projects">
+	<div class="container">
+		<div class="section-header reveal">
+			<div class="section-label">Portfolio</div>
+			<h2 class="section-title-genz">Recent <span class="highlight">Works & Projects</span></h2>
+		</div>
+
+		<div class="projects-grid">
+			<div class="project-card-genz reveal">
+				<a href="Quadcopter Exploration.html" class="card-link" aria-label="Quadcopter Exploration"></a>
+				<span class="card-icon"><i class="fa-solid fa-helicopter"></i></span>
+				<h4>Quadcopter Exploration</h4>
+				<p class="card-desc">Autonomous 3D Environment Mapping</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-1">
+				<a href="Lidar Dust Filter.html" class="card-link" aria-label="LiDAR Dust Filter"></a>
+				<span class="card-icon"><i class="fa-solid fa-filter"></i></span>
+				<h4>LiDAR Dust Filter</h4>
+				<p class="card-desc">ROS 2 Simulation & Point Cloud Analysis</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-2">
+				<a href="listenAI.html" class="card-link" aria-label="ListenAI"></a>
+				<span class="card-icon"><i class="fa-solid fa-microphone"></i></span>
+				<h4>ListenAI</h4>
+				<p class="card-desc">Embedded Speech Detection</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal">
+				<a href="NextGen Scholar Assistant.html" class="card-link" aria-label="NextGen Scholar Assistant"></a>
+				<span class="card-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+				<h4>NextGen Scholar Assistant</h4>
+				<p class="card-desc">Multilingual GenAI Research Tool</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-1">
+				<a href="Omniviz.html" class="card-link" aria-label="OmniViz AI"></a>
+				<span class="card-icon"><i class="fa-solid fa-comments"></i></span>
+				<h4>OmniViz AI</h4>
+				<p class="card-desc">Multimodal GenAI Chatbot</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-2">
+				<a href="Tartan Explore.html" class="card-link" aria-label="Tartan Explore"></a>
+				<span class="card-icon"><i class="fa-solid fa-map"></i></span>
+				<h4>Tartan Explore</h4>
+				<p class="card-desc">Campus Tour Optimization System</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal">
+				<a href="CloudAtlasClassifier.html" class="card-link" aria-label="Cloud AtlasClassifier"></a>
+				<span class="card-icon"><i class="fa-solid fa-tags"></i></span>
+				<h4>Cloud AtlasClassifier</h4>
+				<p class="card-desc">Serverless ML on AWS Lambda</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-1">
+				<a href="DupZero.html" class="card-link" aria-label="DupZero"></a>
+				<span class="card-icon"><i class="fa-solid fa-clone"></i></span>
+				<h4>DupZero</h4>
+				<p class="card-desc">Alert Processing & Multi-stage Deduplication</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-2">
+				<a href="RealProdRag.html" class="card-link" aria-label="RealProdRag"></a>
+				<span class="card-icon"><i class="fa-solid fa-comment-dots"></i></span>
+				<h4>RealProdRag</h4>
+				<p class="card-desc">Production RAG System & Client Delivery</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal">
+				<a href="ResolveLens.html" class="card-link" aria-label="ResolveLens"></a>
+				<span class="card-icon"><i class="fa-solid fa-circle-question"></i></span>
+				<h4>ResolveLens</h4>
+				<p class="card-desc">AI-Powered Python Conflict Explanations</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-1">
+				<a href="RouteRunner.html" class="card-link" aria-label="RouteRunner"></a>
+				<span class="card-icon"><i class="fa-solid fa-wrench"></i></span>
+				<h4>RouteRunner</h4>
+				<p class="card-desc">Streamlit GUI for Device Clustering & API Testing</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-2">
+				<a href="LexPulse.html" class="card-link" aria-label="LexPulse"></a>
+				<span class="card-icon"><i class="fa-solid fa-key"></i></span>
+				<h4>LexPulse</h4>
+				<p class="card-desc">GenAI - Tokenization & Application Design</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal">
+				<a href="LinkStack.html" class="card-link" aria-label="LinkStack"></a>
+				<span class="card-icon"><i class="fa-solid fa-code"></i></span>
+				<h4>LinkStack</h4>
+				<p class="card-desc">GenAI - LangChain & Docker</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-1">
+				<a href="VectorLens.html" class="card-link" aria-label="VectorLens"></a>
+				<span class="card-icon"><i class="fa-solid fa-database"></i></span>
+				<h4>VectorLens</h4>
+				<p class="card-desc">GenAI - RAG & Multimodal LLM Apps</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-2">
+				<a href="SparkQuery.html" class="card-link" aria-label="SparkQuery"></a>
+				<span class="card-icon"><i class="fa-solid fa-table"></i></span>
+				<h4>SparkQuery</h4>
+				<p class="card-desc">Data Systems - SQL on Spark & Postgres</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal">
+				<a href="PipeFlow.html" class="card-link" aria-label="PipeFlow"></a>
+				<span class="card-icon"><i class="fa-solid fa-gears"></i></span>
+				<h4>PipeFlow</h4>
+				<p class="card-desc">Data Pipelines & ETL</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-1">
+				<a href="SparkDrive.html" class="card-link" aria-label="SparkDrive"></a>
+				<span class="card-icon"><i class="fa-solid fa-chart-line"></i></span>
+				<h4>SparkDrive</h4>
+				<p class="card-desc">Machine Learning with Apache Spark</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal reveal-delay-2">
+				<a href="FlameStack.html" class="card-link" aria-label="FlameStack"></a>
+				<span class="card-icon"><i class="fa-solid fa-fire"></i></span>
+				<h4>FlameStack</h4>
+				<p class="card-desc">Deep Learning with PyTorch</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+			<div class="project-card-genz reveal">
+				<a href="StreamFlow.html" class="card-link" aria-label="StreamFlow"></a>
+				<span class="card-icon"><i class="fa-solid fa-bolt"></i></span>
+				<h4>StreamFlow</h4>
+				<p class="card-desc">Streaming & TensorFlow</p>
+				<span class="card-arrow">View Project <i class="fa-solid fa-arrow-right"></i></span>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Daily Bugle Ticker -->
+<div class="bugle-ticker">
+	<div class="bugle-label"><i class="fa-solid fa-newspaper"></i> DAILY BUGLE</div>
+	<div class="bugle-track">
+		<div class="bugle-scroll">
+			<span>BREAKING: CMU grad Yash Sakhale builds 19+ production AI systems</span>
+			<span>EXCLUSIVE: Autonomous quadcopter maps 3D environments without human input</span>
+			<span>DEVELOPING: New LiDAR dust filter revolutionizes point cloud analysis</span>
+			<span>ALERT: ListenAI brings embedded speech detection to edge devices</span>
+			<span>SHOCKING: Multimodal GenAI chatbot OmniViz processes text, image & audio</span>
+			<span>REPORT: RAG-powered NextGen Scholar Assistant helps researchers worldwide</span>
+			<span>BREAKING: CMU grad Yash Sakhale builds 19+ production AI systems</span>
+			<span>EXCLUSIVE: Autonomous quadcopter maps 3D environments without human input</span>
+			<span>DEVELOPING: New LiDAR dust filter revolutionizes point cloud analysis</span>
+			<span>ALERT: ListenAI brings embedded speech detection to edge devices</span>
+			<span>SHOCKING: Multimodal GenAI chatbot OmniViz processes text, image & audio</span>
+			<span>REPORT: RAG-powered NextGen Scholar Assistant helps researchers worldwide</span>
+		</div>
+	</div>
+</div>
+
+<!-- Web Zip Line -->
+<canvas class="web-zip-canvas"></canvas>
+
+<hr class="section-divider">
+<footer class="footer-genz">
+	<div class="container">
+		<div class="footer-grid">
+			<div class="footer-brand">
+				<a href="index.html" class="nav-logo">YS.</a>
+				<p>AI Engineer building production-grade intelligent systems. CMU M.S. AI-ME graduate.</p>
+				<div class="social-links-genz">
+					<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+					<a href="https://www.instagram.com/sakhleboi/" target="_blank" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+					<a href="https://github.com/yashsakhale" target="_blank" class="social-link github" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+					<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank" class="social-link linkedin" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
 				</div>
 			</div>
-		</div> <!-- /row of widgets -->
+			<div class="footer-section">
+				<h4>Navigation</h4>
+				<ul class="footer-links">
+					<li><a href="#about">About</a></li>
+					<li><a href="#docs">Resume</a></li>
+					<li><a href="#projects">Projects</a></li>
+				</ul>
+			</div>
+			<div class="footer-section">
+				<h4>Contact</h4>
+				<ul class="footer-links">
+					<li><a href="mailto:yash.sakhale23@gmail.com">yash.sakhale23@gmail.com</a></li>
+					<li><span style="color: var(--white-muted);">Aldie, Virginia 20105</span></li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p>&copy; 2026 Yash Sakhale. All rights reserved.</p>
+			<p>Crafted with <span style="color: var(--red-bright);">&hearts;</span> and a spider-sense for design.</p>
+		</div>
 	</div>
 </footer>
 
-<footer id="underfooter">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 widget">
-				<div class="widget-body">
-					<p class="text-right">
-						Copyright &copy; 2025, Yash<br> 
-					</p>
-				</div>
-			</div>
-		</div> <!-- /row of widgets -->
-	</div>
-</footer>
+<!-- Back to Top -->
+<button class="back-to-top" aria-label="Back to top">
+	<i class="fa-solid fa-arrow-up"></i>
+</button>
 
-<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-<script src="assets/js/template.js"></script>
-<script>
-function toggleMoreProjects() {
-	var container = document.getElementById('moreProjects');
-	var btn = document.querySelector('.more-projects-btn');
-	var btnText = document.getElementById('btn-text');
-	
-	if (container.classList.contains('revealed')) {
-		container.classList.remove('revealed');
-		btn.classList.remove('expanded');
-		btnText.textContent = 'Explore More Projects';
-		// Smooth scroll back to button
-		setTimeout(function() {
-			btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-		}, 300);
-	} else {
-		container.classList.add('revealed');
-		btn.classList.add('expanded');
-		btnText.textContent = 'Show Less';
-		// Smooth scroll to reveal new content
-		setTimeout(function() {
-			container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-		}, 100);
-	}
-}
-</script>
+<script src="assets/js/template.js?v=1775512506"></script>
 </body>
 </html>

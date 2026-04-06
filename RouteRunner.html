@@ -1,64 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Streamlit-based GUI test rig for device clustering and API alert testing.">
-	<meta name="author" content="Yash Sakhale">
-	<title>RouteRunner</title>
-	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
-	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
-	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
-	<link rel="stylesheet" href="assets/css/styles.css">
-	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RouteRunner - Yash Sakhale Portfolio">
+    <title>RouteRunner</title>
+    <link rel="shortcut icon" href="assets/images/Yash.png">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<header id="header">
-	<div id="head" class="parallax" parallax-speed="1">
-		<h1 id="logo" class="text-center">
-			<span class="title">Yash Sakhale</span>
-			<span class="tagline">Graduate Researcher<br>
-				<a href="mailto:ysakhale@andrew.cmu.edu">Email: ysakhale@andrew.cmu.edu</a></span>
-		</h1>
-	</div>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="index.html">Home</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-</header>
 
-<main id="main">
-	<div class="container">
-		<div class="row topspace">
-			<article class="col-sm-8 maincontent">
-				<header class="page-header">
-					<h1 class="page-title">RouteRunner</h1>
-				</header>
+<!-- Scroll Progress -->
+<div class="scroll-progress"></div>
 
-				<h3>Project Motivation &amp; Problem Statement</h3>
-				<p>In IoT and location-based services, devices are grouped into geographic clusters for efficient alert management and data aggregation. When devices move beyond cluster boundaries, the system must dynamically re-cluster them and trigger appropriate alerts. Testing this clustering logic against a live API—validating alert delivery, SNS notifications, and SQS message queuing—is complex and error-prone when done manually. RouteRunner was built as a comprehensive GUI-based test platform that automates validation of device clustering behavior, API alert delivery, and AWS messaging infrastructure for the location services platform.</p>
+<!-- Background Effects -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+<div class="noise-overlay"></div>
+<div class="web-pattern"></div>
+<div class="cursor-glow"></div>
+<!-- Spider Web Strings -->
+<div class="web-strings">
+<div class="web-string"></div>
+<div class="web-string"></div>
+<div class="web-string"></div>
+<div class="web-string"></div>
+<div class="web-string"></div>
+</div>
+
+
+<!-- White Web Drift -->
+<div class="web-drift">
+<div class="web-strand"></div>
+<div class="web-strand"></div>
+<div class="web-strand"></div>
+<div class="web-strand"></div>
+<div class="web-strand"></div>
+<div class="web-strand"></div>
+</div>
+
+<!-- Web Corner Flickers -->
+<div class="web-flicker web-flicker-tl"></div>
+<div class="web-flicker web-flicker-tr"></div>
+<div class="web-flicker web-flicker-bl"></div>
+<div class="web-flicker web-flicker-br"></div>
+
+<!-- Spider Particles -->
+<div class="spider-particles">
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar-genz">
+    <a href="index.html" class="nav-logo">YS.</a>
+    <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="mailto:yash.sakhale23@gmail.com" class="nav-cta">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Project Hero -->
+<section class="project-hero">
+    <div class="container">
+        <a href="index.html#projects" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Projects
+        </a>
+        <h1>RouteRunner</h1>
+    </div>
+</section>
+
+<!-- Project Content -->
+<section class="project-content">
+    <div class="container">
+        <div class="project-content-grid">
+            <div class="project-main reveal">
+                <h3>Project Motivation &amp; Problem Statement</h3>
+				<p>In IoT and location-based services, devices are grouped into geographic clusters for efficient alert management and data aggregation. When devices move beyond cluster boundaries, the system must dynamically re-cluster them and trigger appropriate alerts. Testing this clustering logic against a live API-validating alert delivery, SNS notifications, and SQS message queuing-is complex and error-prone when done manually. RouteRunner (Genie Test Rig) was built as a comprehensive GUI-based test platform that automates validation of device clustering behavior, API alert delivery, and AWS messaging infrastructure for the Genie location services platform.</p>
 
 				<h3>Technical Approach</h3>
 
 				<h4>1. Modular Application Architecture</h4>
 				<p>Built a clean, modular Python application with separated concerns:</p>
 				<ul>
-					<li><strong><code>app/api_client.py</code>:</strong> Core API client for device registration, location updates, and cluster management.</li>
-					<li><strong><code>app/alerts.py</code>:</strong> Alert testing module for cluster-specific targeting and delivery validation.</li>
+					<li><strong><code>app/genie_api.py</code>:</strong> Core API client for device registration, location updates, and cluster management.</li>
+					<li><strong><code>app/genie_alerts.py</code>:</strong> Alert testing module for cluster-specific targeting and delivery validation.</li>
 					<li><strong><code>app/geo.py</code>:</strong> Geographic utilities including Haversine distance calculations, bearing computations, and coordinate offsets.</li>
 					<li><strong><code>app/radius_testing.py</code>:</strong> Mile-radius based testing for geographic boundary validation.</li>
 					<li><strong><code>app/aws_sns.py</code>:</strong> AWS SNS integration for endpoint ARN management and push notification testing.</li>
@@ -71,7 +109,7 @@
 					<li><strong>Configuration Panel:</strong> Device ARN input, coordinate entry, authentication mode selection, AWS credential configuration, and clustering threshold parameters.</li>
 					<li><strong>Device Actions:</strong> Register new devices, update locations, refresh device state with real-time status feedback.</li>
 					<li><strong>Clusters View:</strong> List and analyze active clusters with detailed information display.</li>
-					<li><strong>Alert Testing:</strong> Send alerts through the API, test cluster-specific targeting, validate delivery to registered devices.</li>
+					<li><strong>Alert Testing:</strong> Send alerts through Genie API, test cluster-specific targeting, validate delivery to registered devices.</li>
 					<li><strong>Quick Moves:</strong> Preset location buttons, distance-based movement tools, and threshold-crossing test scenarios.</li>
 				</ul>
 
@@ -79,7 +117,7 @@
 				<ul>
 					<li><strong>Multi-Mode Support:</strong> Configurable authentication via environment variables supporting <code>none</code>, <code>api_key</code>, and <code>bearer</code> modes.</li>
 					<li><strong>Automatic Switching:</strong> Session-based authentication mode selection with proper header injection (<code>x-api-key</code> or <code>Authorization: Bearer</code>).</li>
-					<li><strong>Environment Variables:</strong> <code>API_BASE_URL</code>, <code>AUTH_MODE</code>, <code>API_KEY</code>, <code>BEARER_TOKEN</code>, <code>AWS_REGION</code>, <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code>.</li>
+					<li><strong>Environment Variables:</strong> <code>GENIE_BASE_URL</code>, <code>GENIE_AUTH_MODE</code>, <code>GENIE_API_KEY</code>, <code>GENIE_BEARER_TOKEN</code>, <code>AWS_REGION</code>, <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code>.</li>
 				</ul>
 
 				<h4>4. pytest Test Suite</h4>
@@ -104,7 +142,7 @@
 
 				<h3>Implementation Details</h3>
 				<ul>
-					<li><strong>Base URL:</strong> Configurable API endpoint for the location services backend.</li>
+					<li><strong>Base URL:</strong> Configurable Genie API endpoint (default: <code>https://geniedev.govigilant.app</code>).</li>
 					<li><strong>Device ARN Format:</strong> SNS application endpoint ARNs (<code>APNS_SANDBOX</code> or similar) for push notification targeting.</li>
 					<li><strong>Dual Entrypoints:</strong> <code>run.py</code> for Streamlit GUI launch; <code>app/main.py</code> for programmatic/CI execution.</li>
 					<li><strong>Session Management:</strong> Streamlit session state for persistent configuration across interactions.</li>
@@ -139,10 +177,9 @@
 					<li>Python application architecture with modular design</li>
 					<li>Environment-based configuration management</li>
 				</ul>
-			</article>
-
-			<aside class="col-md-4 sidebar sidebar-left">
-				<div class="widget">
+            </div>
+            <div class="project-sidebar">
+                <div class="widget-genz">
 					<h4>Resources</h4>
 					<ul>
 						<li><a href="https://streamlit.io/">Streamlit</a>: Dashboard Framework</li>
@@ -151,55 +188,28 @@
 						<li><a href="https://en.wikipedia.org/wiki/Cluster_analysis">Clustering</a>: Algorithm Concepts</li>
 					</ul>
 				</div>
-			</aside>
-		</div>
-	</div>
-</main>
+            </div>
+        </div>
+    </div>
+</section>
 
-<footer id="footer">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3 widget">
-				<h3 class="widget-title">Contact</h3>
-				<div class="widget-body">
-					<p>+5715461217<br>
-						<a href="mailto:ysakhale@andrew.cmu.edu">ysakhale@andrew.cmu.edu</a><br>
-						<br>
-						Aldie, Virginia 20105
-					</p>
-				</div>
-			</div>
-			<div class="col-md-3 widget">
-				<h3 class="widget-title">Follow me</h3>
-				<div class="widget-body">
-					<p class="follow-me-icons">
-						<a href="https://www.facebook.com/profile.php?id=100009630379760" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
-						<a href="https://www.instagram.com/sakhleboi/" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
-						<a href="https://github.com/yashsakhale" target="_blank"><i class="fa fa-github fa-2"></i></a>
-						<a href="https://www.linkedin.com/in/yash-sakhale-5924121b8" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<hr class="section-divider">
+
+<!-- Footer -->
+<footer class="footer-genz">
+    <div class="container">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Yash Sakhale. All rights reserved.</p>
+            <p><a href="index.html">Back to Home</a></p>
+        </div>
+    </div>
 </footer>
 
-<footer id="underfooter">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 widget">
-				<div class="widget-body">
-					<p class="text-right">
-						Copyright &copy; 2025, Yash
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="assets/js/template.js"></script>
+<!-- Back to Top -->
+<button class="back-to-top" aria-label="Back to top">
+	<i class="fa-solid fa-arrow-up"></i>
+</button>
+
 </body>
 </html>
